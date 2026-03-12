@@ -34,22 +34,15 @@ def phan_tich_ai(kq_list):
         if kq_list[i] == kq_cuoi: chuoi += 1
         else: break
         
-    # 1. Dò Cầu 1-1 (Xen kẽ T-X-T-X)
+    # 1. Dò Cầu Xen Kẽ (T-X-T-X)
     if gan_nhat == ["Tài", "Xỉu", "Tài", "Xỉu", "Tài"] or gan_nhat == ["Xỉu", "Tài", "Xỉu", "Tài", "Xỉu"]:
         du_doan = "XỈU" if kq_cuoi == "Tài" else "TÀI"
         ty_le = round(random.uniform(88.0, 96.0), 1)
-    # 2. Dò Cầu 2-2 (T-T-X-X)
-    elif gan_nhat[-4:] == ["Tài", "Tài", "Xỉu", "Xỉu"]:
-        du_doan = "TÀI"
-        ty_le = round(random.uniform(85.0, 92.0), 1)
-    elif gan_nhat[-4:] == ["Xỉu", "Xỉu", "Tài", "Tài"]:
-        du_doan = "XỈU"
-        ty_le = round(random.uniform(85.0, 92.0), 1)
-    # 3. Bẻ Cầu Bệt Dài
+    # 2. Bẻ Cầu Bệt Dài
     elif chuoi >= 4:
         du_doan = "TÀI" if kq_cuoi == "Xỉu" else "XỈU"
         ty_le = min(75 + chuoi * 4.5, 99.9)
-    # 4. Phân tích xung nhịp ngẫu nhiên theo công thức
+    # 3. Phân tích xung nhịp ngẫu nhiên theo công thức
     else:
         du_doan = "TÀI" if kq_cuoi == "Xỉu" else "XỈU"
         ty_le = round(random.uniform(70.0, 82.0), 1)
@@ -172,4 +165,4 @@ async def home(): return FileResponse("index.html")
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 8080))
     uvicorn.run("server_ai:app", host="0.0.0.0", port=port)
-      
+    
