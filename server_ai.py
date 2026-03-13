@@ -21,7 +21,7 @@ def khoi_tao_db():
 
 khoi_tao_db()
 
-# ================= NÂNG CẤP AI V3: SIÊU THUẬT TOÁN SOI CẦU =================
+# ================= NÂNG CẤP AI: SOI CẦU ĐA TẦNG =================
 def phan_tich_ai(kq_list):
     tong_tai = kq_list.count("Tài"); tong_xiu = kq_list.count("Xỉu")
     if len(kq_list) < 5: return {"du_doan": "WAIT", "ti_le": 0, "tong_tai": tong_tai, "tong_xiu": tong_xiu}
@@ -29,7 +29,6 @@ def phan_tich_ai(kq_list):
     gan_nhat = kq_list[-5:]
     kq_cuoi = kq_list[-1]
     
-    # Tính toán chuỗi cầu hiện tại
     chuoi = 1
     for i in range(len(kq_list)-2, -1, -1):
         if kq_list[i] == kq_cuoi: chuoi += 1
@@ -38,20 +37,22 @@ def phan_tich_ai(kq_list):
     # 1. Dò Cầu 1-1 (Xen kẽ T-X-T-X)
     if gan_nhat == ["Tài", "Xỉu", "Tài", "Xỉu", "Tài"] or gan_nhat == ["Xỉu", "Tài", "Xỉu", "Tài", "Xỉu"]:
         du_doan = "XỈU" if kq_cuoi == "Tài" else "TÀI"
-        ty_le = round(random.uniform(90.1, 98.9), 1)
-        
-    # 2. Dò Cầu Bệt Dài (Bẻ cầu)
+        ty_le = round(random.uniform(88.0, 96.0), 1)
+    # 2. Dò Cầu 2-2 (T-T-X-X)
+    elif gan_nhat[-4:] == ["Tài", "Tài", "Xỉu", "Xỉu"]:
+        du_doan = "TÀI"
+        ty_le = round(random.uniform(85.0, 92.0), 1)
+    elif gan_nhat[-4:] == ["Xỉu", "Xỉu", "Tài", "Tài"]:
+        du_doan = "XỈU"
+        ty_le = round(random.uniform(85.0, 92.0), 1)
+    # 3. Bẻ Cầu Bệt Dài
     elif chuoi >= 4:
-        # AI tính toán xác suất bẻ cầu cao hơn khi bệt càng dài
         du_doan = "TÀI" if kq_cuoi == "Xỉu" else "XỈU"
-        base_tle = 75 + chuoi * 4.5
-        ty_le = round(min(base_tle, 99.9), 1)
-        
-    # 3. Phân tích xung nhịp ngẫu nhiên theo công thức xác suất cao
+        ty_le = min(75 + chuoi * 4.5, 99.9)
+    # 4. Phân tích xung nhịp ngẫu nhiên theo công thức
     else:
-        # Dựa trên xu hướng tổng thể và 2 phiên gần nhất
         du_doan = "TÀI" if kq_cuoi == "Xỉu" else "XỈU"
-        ty_le = round(random.uniform(75.0, 88.0), 1)
+        ty_le = round(random.uniform(70.0, 82.0), 1)
         
     return {"du_doan": du_doan, "ti_le": round(ty_le, 1), "tong_tai": tong_tai, "tong_xiu": tong_xiu}
 
@@ -171,4 +172,4 @@ async def home(): return FileResponse("index.html")
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 8080))
     uvicorn.run("server_ai:app", host="0.0.0.0", port=port)
-        
+                        
