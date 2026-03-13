@@ -356,30 +356,51 @@
     <div id="profile-modal" class="modal-overlay" style="display:none;"><div class="modal-box"><div class="close-btn" onclick="this.parentElement.parentElement.style.display='none'">×</div><div class="panel-title">HỒ SƠ CỦA BẠN</div><div style="text-align:center; font-weight:bold; margin-bottom: 20px;">Tài khoản: <span id="pro-user" style="color:var(--secondary);"></span><br>Số dư: <span id="pro-bal" style="color:var(--accent); font-size:20px;"></span> VNĐ<br>HSD VIP: <span id="pro-vip" style="color:#008000;"></span></div><button class="cyber-btn btn-green" onclick="document.getElementById('deposit-modal').style.display='flex'">💵 NẠP THẺ CÀO</button><button class="cyber-btn btn-yellow" onclick="document.getElementById('store-modal').style.display='flex'">🛒 MUA GÓI VIP</button><button class="cyber-btn btn-red" onclick="logout()">ĐĂNG XUẤT</button></div></div>
     <div id="deposit-modal" class="modal-overlay" style="display:none;"><div class="modal-box"><div class="close-btn" onclick="this.parentElement.parentElement.style.display='none'">×</div><div class="panel-title">NẠP THẺ CÀO</div><select id="dep-net" class="input-box"><option value="VIETTEL">Viettel</option><option value="VINAPHONE">Vinaphone</option><option value="MOBIFONE">Mobifone</option></select><select id="dep-amt" class="input-box"><option value="30000">30,000</option><option value="50000">50,000</option><option value="100000">100,000</option><option value="200000">200,000</option></select><input type="text" id="dep-pin" class="input-box" placeholder="Mã thẻ (PIN)"><input type="text" id="dep-seri" class="input-box" placeholder="Số Serial"><button class="cyber-btn btn-green" onclick="submitDeposit()">GỬI THẺ</button><div id="dep-msg" style="text-align:center; font-weight:bold;"></div></div></div>
     <div id="store-modal" class="modal-overlay" style="display:none;"><div class="modal-box"><div class="close-btn" onclick="this.parentElement.parentElement.style.display='none'">×</div><div class="panel-title">CỬA HÀNG VIP</div><div class="list-item">1 Ngày VIP (30K) <button class="cyber-btn btn-yellow" style="width:auto; margin:0; padding:8px 15px;" onclick="buyVIP('1D')">MUA</button></div><div class="list-item">3 Ngày VIP (50K) <button class="cyber-btn btn-yellow" style="width:auto; margin:0; padding:8px 15px;" onclick="buyVIP('3D')">MUA</button></div><div class="list-item">1 Tuần VIP (100K) <button class="cyber-btn btn-yellow" style="width:auto; margin:0; padding:8px 15px;" onclick="buyVIP('7D')">MUA</button></div><div class="list-item">1 Tháng VIP (150K) <button class="cyber-btn btn-yellow" style="width:auto; margin:0; padding:8px 15px;" onclick="buyVIP('30D')">MUA</button></div><div class="list-item">VĨNH VIỄN (200K) <button class="cyber-btn btn-red" style="width:auto; margin:0; padding:8px 15px;" onclick="buyVIP('PERM')">MUA</button></div></div></div>
-    <div id="admin-modal" class="modal-overlay" style="display:none;"><div class="modal-box" style="max-width: 500px;"><div class="close-btn" onclick="this.parentElement.parentElement.style.display='none'">×</div><div class="panel-title" style="color:var(--accent);">QUẢN TRỊ ADMIN</div><div style="max-height: 400px; overflow-y: auto;"><h3 style="margin
-                                                                                                                                                                                                                                                                                                                                                       <script>
+    <div id="admin-modal" class="modal-overlay" style="display:none;"><div class="modal-box" style="max-width: 500px;"><div class="close-btn" onclick="this.parentElement.parentElement.style.display='none'">×</div><div class="panel-title" style="color:var(--accent);">QUẢN TRỊ ADMIN</div><div style="max-height: 400px; overflow-y: auto;"><h3 style="margin    <script>
         let myUser = ""; let myPass = ""; let scanInterval; let phienCu = ""; let isUserVIP = false; let activeGame = ""; 
+        let isSpamming = false; // Biến chống spam bấm liên tục
 
         async function auth(action) {
-            let u = document.getElementById('auth-user').value; let p = document.getElementById('auth-pass').value;
-            let res = await fetch('/api/auth', { method: 'POST', headers: {'Content-Type':'application/json'}, body: JSON.stringify({action:action, username:u, password:p})});
-            let json = await res.json();
-            if (json.status === "success") {
-                if (action === "register") { document.getElementById('auth-msg').innerText = "Đăng ký thành công!"; document.getElementById('auth-msg').style.color = "#008000"; }
-                else {
-                    myUser = u; myPass = p;
-                    document.getElementById('auth-wrapper').style.display = 'none'; document.getElementById('main-header').style.display = 'flex'; document.getElementById('main-dashboard').style.display = 'grid';
-                    if (u === "hungadmin11") document.getElementById('btn-admin-panel').style.display = 'block';
-                    loadProfile();
+            if (isSpamming) {
+                document.getElementById('auth-msg').innerText = "Vui lòng đợi 3 giây...";
+                document.getElementById('auth-msg').style.color = "orange";
+                return;
+            }
+            isSpamming = true; setTimeout(() => { isSpamming = false; }, 3000);
+
+            let u = document.getElementById('auth-user').value.trim(); 
+            let p = document.getElementById('auth-pass').value.trim();
+            
+            try {
+                let res = await fetch('/api/auth', { method: 'POST', headers: {'Content-Type':'application/json'}, body: JSON.stringify({action:action, username:u, password:p})});
+                let json = await res.json();
+                if (json.status === "success") {
+                    if (action === "register") { 
+                        document.getElementById('auth-msg').innerText = json.msg; 
+                        document.getElementById('auth-msg').style.color = "#008000"; 
+                    } else {
+                        myUser = u; myPass = p;
+                        document.getElementById('auth-wrapper').style.display = 'none'; 
+                        document.getElementById('main-header').style.display = 'flex'; 
+                        document.getElementById('main-dashboard').style.display = 'grid';
+                        if (u === "hungadmin11") document.getElementById('btn-admin-panel').style.display = 'block';
+                        loadProfile();
+                    }
+                } else { 
+                    document.getElementById('auth-msg').innerText = json.msg; 
+                    document.getElementById('auth-msg').style.color = "var(--secondary)"; 
                 }
-            } else { document.getElementById('auth-msg').innerText = json.msg; document.getElementById('auth-msg').style.color = var(--secondary); }
+            } catch(e) {
+                document.getElementById('auth-msg').innerText = "Mất kết nối máy chủ!"; 
+                document.getElementById('auth-msg').style.color = "red";
+            }
         }
 
         function logout() { myUser = ""; myPass = ""; isUserVIP = false; activeGame = ""; clearInterval(scanInterval); closeGame(); document.getElementById('profile-modal').style.display = 'none'; document.getElementById('main-header').style.display = 'none'; document.getElementById('main-dashboard').style.display = 'none'; document.getElementById('auth-wrapper').style.display = 'flex'; }
         
         async function loadProfile() { if(!myUser) return; let res = await fetch(`/api/user_info?username=${myUser}`); let json = await res.json(); if(json.status === "success") { isUserVIP = json.data.is_vip; let bal = json.data.balance.toLocaleString('vi-VN'); document.getElementById('header-user').innerText = myUser; document.getElementById('header-bal').innerText = bal + "đ"; document.getElementById('pro-user').innerText = myUser; document.getElementById('pro-bal').innerText = bal; document.getElementById('pro-vip').innerText = json.data.vip_expire; } }
         
-        async function submitDeposit() { let net = document.getElementById('dep-net').value; let amt = document.getElementById('dep-amt').value; let pin = document.getElementById('dep-pin').value; let seri = document.getElementById('dep-seri').value; if(!pin || !seri) { document.getElementById('dep-msg').innerText = "Nhập đủ PIN và Seri!"; return; } let res = await fetch('/api/deposit', { method: 'POST', headers: {'Content-Type':'application/json'}, body: JSON.stringify({username:myUser, network:net, amount:parseInt(amt), pin:pin, serial:seri})}); let json = await res.json(); document.getElementById('dep-msg').innerText = json.msg; document.getElementById('dep-msg').style.color = json.status==="success"?"#008000":var(--secondary); }
+        async function submitDeposit() { let net = document.getElementById('dep-net').value; let amt = document.getElementById('dep-amt').value; let pin = document.getElementById('dep-pin').value; let seri = document.getElementById('dep-seri').value; if(!pin || !seri) { document.getElementById('dep-msg').innerText = "Nhập đủ PIN và Seri!"; return; } let res = await fetch('/api/deposit', { method: 'POST', headers: {'Content-Type':'application/json'}, body: JSON.stringify({username:myUser, network:net, amount:parseInt(amt), pin:pin, serial:seri})}); let json = await res.json(); document.getElementById('dep-msg').innerText = json.msg; document.getElementById('dep-msg').style.color = json.status==="success"?"#008000":"var(--secondary)"; }
         
         async function buyVIP(pkg) { if(!confirm("Xác nhận mua gói VIP này?")) return; let res = await fetch('/api/buy_vip', { method: 'POST', headers: {'Content-Type':'application/json'}, body: JSON.stringify({username:myUser, package:pkg})}); let json = await res.json(); alert(json.msg); loadProfile(); }
 
@@ -428,7 +449,7 @@
                     document.getElementById('robo-phien').innerText = "#" + data.phien;
                     let el = document.getElementById('robo-kq'); el.innerText = data.du_doan; 
                     document.getElementById('robo-tyle').innerText = "WIN: " + data.ti_le + "%";
-                    el.style.color = data.du_doan === "TÀI" ? "#A52A2A" : (data.du_doan === "XỈU" ? var(--secondary) : var(--text-main));
+                    el.style.color = data.du_doan === "TÀI" ? "#A52A2A" : (data.du_doan === "XỈU" ? "var(--secondary)" : "var(--text-main)");
                     if(data.tong_tai !== undefined && data.tong_xiu !== undefined) {
                         document.getElementById('robo-thongke').style.display = 'flex';
                         document.getElementById('tk-tai').innerText = data.tong_tai; document.getElementById('tk-xiu').innerText = data.tong_xiu;
@@ -447,7 +468,7 @@
             document.getElementById('robo-view-md5').style.display = 'none'; document.getElementById('robo-view-auto').style.display = 'block'; document.getElementById('robo-thongke').style.display = 'none';
             document.getElementById('robo-subtitle').innerHTML = 'KẾT QUẢ MD5 <i class="fas fa-redo" style="cursor:pointer; color:var(--accent);" onclick="switchRoboMode(\'md5\')"></i>';
             let el = document.getElementById('robo-kq'); el.innerText = isTai ? "TÀI" : "XỈU"; document.getElementById('robo-tyle').innerText = "WIN: " + ti_le.toFixed(1) + "%";
-            el.style.color = isTai ? "#A52A2A" : var(--secondary);
+            el.style.color = isTai ? "#A52A2A" : "var(--secondary)";
         }
 
         dragElement(document.getElementById("draggable-robot"));
