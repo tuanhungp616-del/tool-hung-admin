@@ -8,131 +8,33 @@
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Nunito:wght@400;700;800&display=swap" rel="stylesheet">
     <style>
         :root { 
-            --primary: #1a1a1a; /* Đen huyền bí */
-            --secondary: #b3995d; /* Vàng ánh kim */
-            --accent: #ffd700; /* Vàng kim loại sáng */
-            --text-main: #f0f0f0; /* Trắng xám */
+            --primary: #1a1a1a; 
+            --secondary: #b3995d; 
+            --accent: #ffd700; 
+            --text-main: #f0f0f0; 
             --bg-gradient: linear-gradient(135deg, #0f0f0f 0%, #2a2a2a 100%); 
-            --panel-bg: #222222; /* Xám đen */
-            --border-color: #444444; /* Xám đậm */
+            --panel-bg: #222222; 
+            --border-color: #444444; 
         }
         * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
         body { font-family: 'Nunito', sans-serif; background: var(--bg-gradient); color: var(--text-main); overflow-x: hidden; min-height: 100vh; }
         
-        header { 
-            height: 75px; 
-            background: var(--primary); 
-            border-bottom: 2px solid var(--secondary); 
-            display: flex; 
-            justify-content: space-between; 
-            align-items: center; 
-            padding: 0 20px; 
-            position: sticky; 
-            top: 0; 
-            z-index: 100; 
-            box-shadow: 0 5px 15px rgba(0,0,0,0.5); 
-        }
-        .logo { 
-            display: flex; 
-            align-items: center; 
-            gap: 10px; 
-            font-family: 'Playfair Display', serif; 
-            font-size: 1.5rem; 
-            font-weight: 900;
-            color: var(--secondary); 
-            text-shadow: 1px 1px 2px rgba(255,215,0,0.3); 
-        }
-        .profile-badge { 
-            background: rgba(179,153,93,0.1); 
-            border: 1px solid var(--secondary); 
-            color: var(--secondary); 
-            padding: 8px 15px; 
-            border-radius: 20px; 
-            font-size: 14px; 
-            font-weight: bold; 
-            cursor: pointer; 
-            display: flex; 
-            flex-direction: column; 
-            align-items: flex-end;
-            transition: all 0.3s ease;
-        }
-        .profile-badge:hover {
-            background: rgba(179,153,93,0.2);
-            box-shadow: 0 0 10px rgba(179,153,93,0.5);
-        }
+        header { height: 75px; background: var(--primary); border-bottom: 2px solid var(--secondary); display: flex; justify-content: space-between; align-items: center; padding: 0 20px; position: sticky; top: 0; z-index: 100; box-shadow: 0 5px 15px rgba(0,0,0,0.5); }
+        .logo { display: flex; align-items: center; gap: 10px; font-family: 'Playfair Display', serif; font-size: 1.5rem; font-weight: 900; color: var(--secondary); text-shadow: 1px 1px 2px rgba(255,215,0,0.3); }
+        .profile-badge { background: rgba(179,153,93,0.1); border: 1px solid var(--secondary); color: var(--secondary); padding: 8px 15px; border-radius: 20px; font-size: 14px; font-weight: bold; cursor: pointer; display: flex; flex-direction: column; align-items: flex-end; transition: all 0.3s ease; }
+        .profile-badge:hover { background: rgba(179,153,93,0.2); box-shadow: 0 0 10px rgba(179,153,93,0.5); }
         
         #auth-wrapper, .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; display: flex; justify-content: center; align-items: center; z-index: 999; backdrop-filter: blur(8px); background: rgba(0,0,0,0.8); }
-        .auth-box, .modal-box { 
-            background: var(--panel-bg); 
-            border: 2px solid var(--secondary); 
-            border-radius: 15px; 
-            padding: 30px; 
-            width: 90%; 
-            max-width: 400px; 
-            position: relative; 
-            box-shadow: 0 10px 30px rgba(179,153,93,0.3); 
-        }
+        .auth-box, .modal-box { background: var(--panel-bg); border: 2px solid var(--secondary); border-radius: 15px; padding: 30px; width: 90%; max-width: 400px; position: relative; box-shadow: 0 10px 30px rgba(179,153,93,0.3); }
         
         #main-dashboard { display: none; grid-template-columns: 1fr; gap: 20px; padding: 20px; max-width: 800px; margin: 0 auto; }
-        .panel { 
-            background: var(--panel-bg); 
-            border: 1px solid var(--border-color); 
-            border-radius: 15px; 
-            padding: 25px; 
-            box-shadow: 0 5px 15px rgba(0,0,0,0.3); 
-            transition: all 0.3s ease;
-        }
-        .panel:hover {
-            border-color: var(--secondary);
-            box-shadow: 0 5px 20px rgba(179,153,93,0.3);
-        }
-        .panel-title { 
-            font-family: 'Playfair Display', serif; 
-            font-size: 1.6rem; 
-            font-weight: 700;
-            color: var(--secondary); 
-            margin-bottom: 20px; 
-            text-align: center; 
-            border-bottom: 2px solid #333; 
-            padding-bottom: 10px;
-        }
-        .cate-title { 
-            font-family: 'Playfair Display', serif; 
-            font-size: 1.2rem; 
-            font-weight: 700;
-            color: var(--accent); 
-            margin: 20px 0 15px 0; 
-            text-transform: uppercase; 
-            display: flex; 
-            align-items: center; 
-            gap: 10px;
-        }
+        .panel { background: var(--panel-bg); border: 1px solid var(--border-color); border-radius: 15px; padding: 25px; box-shadow: 0 5px 15px rgba(0,0,0,0.3); transition: all 0.3s ease; }
+        .panel:hover { border-color: var(--secondary); box-shadow: 0 5px 20px rgba(179,153,93,0.3); }
+        .panel-title { font-family: 'Playfair Display', serif; font-size: 1.6rem; font-weight: 700; color: var(--secondary); margin-bottom: 20px; text-align: center; border-bottom: 2px solid #333; padding-bottom: 10px; }
+        .cate-title { font-family: 'Playfair Display', serif; font-size: 1.2rem; font-weight: 700; color: var(--accent); margin: 20px 0 15px 0; text-transform: uppercase; display: flex; align-items: center; gap: 10px; }
         
-        .cyber-btn { 
-            padding: 15px; 
-            border: 1px solid var(--secondary); 
-            border-radius: 10px; 
-            cursor: pointer; 
-            font-family: 'Nunito', sans-serif; 
-            font-size: 16px; 
-            font-weight: bold;
-            color: var(--primary); 
-            width: 100%; 
-            margin-bottom: 15px; 
-            background: var(--secondary); 
-            box-shadow: 0 4px 10px rgba(179,153,93,0.3); 
-            transition: all 0.3s ease; 
-            display: flex; 
-            align-items: center; 
-            justify-content: center; 
-            gap: 10px;
-        }
-        .cyber-btn:hover { 
-            background: var(--accent); 
-            color: var(--primary);
-            box-shadow: 0 6px 15px rgba(255,215,0,0.5);
-            transform: translateY(-2px);
-        }
+        .cyber-btn { padding: 15px; border: 1px solid var(--secondary); border-radius: 10px; cursor: pointer; font-family: 'Nunito', sans-serif; font-size: 16px; font-weight: bold; color: var(--primary); width: 100%; margin-bottom: 15px; background: var(--secondary); box-shadow: 0 4px 10px rgba(179,153,93,0.3); transition: all 0.3s ease; display: flex; align-items: center; justify-content: center; gap: 10px; }
+        .cyber-btn:hover { background: var(--accent); color: var(--primary); box-shadow: 0 6px 15px rgba(255,215,0,0.5); transform: translateY(-2px); }
         .cyber-btn:active { transform: translateY(1px); box-shadow: 0 2px 5px rgba(0,0,0,0.5); }
         .btn-red { background: #8B0000; color: #fff; border-color: #8B0000; box-shadow: 0 4px 10px rgba(139,0,0,0.3); }
         .btn-red:hover { background: #A52A2A; border-color: #A52A2A; box-shadow: 0 6px 15px rgba(165,42,42,0.5); }
@@ -141,138 +43,34 @@
         .btn-green { background: #006400; color: #fff; border-color: #006400; box-shadow: 0 4px 10px rgba(0,100,0,0.3); }
         .btn-green:hover { background: #228B22; border-color: #228B22; box-shadow: 0 6px 15px rgba(34,139,34,0.5); }
         
-        .input-box { 
-            width: 100%; 
-            background: rgba(255,255,255,0.05); 
-            border: 1px solid var(--border-color); 
-            border-radius: 10px; 
-            color: var(--text-main); 
-            font-family: 'Nunito', sans-serif; 
-            font-size: 1rem; 
-            font-weight: bold; 
-            padding: 15px; 
-            text-align: center; 
-            margin-bottom: 20px; 
-            outline: none; 
-            transition: all 0.3s ease;
-        }
+        .input-box { width: 100%; background: rgba(255,255,255,0.05); border: 1px solid var(--border-color); border-radius: 10px; color: var(--text-main); font-family: 'Nunito', sans-serif; font-size: 1rem; font-weight: bold; padding: 15px; text-align: center; margin-bottom: 20px; outline: none; transition: all 0.3s ease; }
         .input-box:focus { border-color: var(--secondary); background: rgba(255,255,255,0.1); box-shadow: 0 0 10px rgba(179,153,93,0.5); }
         
         #game-overlay { display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: 2000; background: #000; }
         #game-frame { width: 100%; height: 100%; border: none; }
-        .close-game-btn { 
-            position: absolute; 
-            top: 15px; 
-            left: 15px; 
-            background: var(--primary); 
-            color: var(--secondary); 
-            border: 1px solid var(--secondary); 
-            padding: 10px 20px; 
-            border-radius: 10px; 
-            font-weight: bold; 
-            z-index: 2001; 
-            box-shadow: 0 4px 10px rgba(179,153,93,0.3); 
-            font-family: 'Nunito', sans-serif;
-            transition: all 0.3s ease;
-        }
-        .close-game-btn:hover {
-            background: var(--secondary);
-            color: var(--primary);
-            box-shadow: 0 6px 15px rgba(179,153,93,0.5);
-        }
+        .close-game-btn { position: absolute; top: 15px; left: 15px; background: var(--primary); color: var(--secondary); border: 1px solid var(--secondary); padding: 10px 20px; border-radius: 10px; font-weight: bold; z-index: 2001; box-shadow: 0 4px 10px rgba(179,153,93,0.3); font-family: 'Nunito', sans-serif; transition: all 0.3s ease; }
+        .close-game-btn:hover { background: var(--secondary); color: var(--primary); box-shadow: 0 6px 15px rgba(179,153,93,0.5); }
         
-        /* CẬP NHẬT TOOL NẰM NGANG - ẢNH CHÂN DUNG TRÁI, KẾT QUẢ PHẢI */
-        #draggable-robot { position: absolute; top: 50%; left: 5%; z-index: 2005; display: flex; flex-direction: row; align-items: center; transition: transform 0.2s ease; transform-origin: left center;}
-        
-        /* ẢNH CHÂN DUNG ĐẨY LÊN TRÊN (Z-INDEX 2) CHỒNG VÀO BẢNG KẾT QUẢ, CẮT TRÒN ĐẸP VÀ VIỀN VÀNG */
-        .robo-img { 
-            width: 100px; 
-            height: 100px; 
-            object-fit: cover; 
-            border-radius: 50%; 
-            border: 4px solid var(--accent); 
-            filter: drop-shadow(0 5px 15px rgba(179,153,93,0.5)); 
-            cursor: grab; 
-            z-index: 2; 
-            position: relative; 
-            margin-right: -25px; 
-        }
+        #draggable-robot { position: absolute; top: 50%; left: 5%; z-index: 2005; display: flex; flex-direction: row; align-items: center; transition: transform 0.2s ease; transform-origin: left center; }
+        .robo-img { width: 100px; height: 100px; object-fit: cover; border-radius: 50%; border: 4px solid var(--accent); filter: drop-shadow(0 5px 15px rgba(179,153,93,0.5)); cursor: grab; z-index: 2; position: relative; margin-right: -25px; }
         .robo-img:active { cursor: grabbing; }
 
-        /* BẢNG KẾT QUẢ KÉ SANG BÊN PHẢI */
-        .robo-dialog { 
-            background: rgba(34,34,34,0.95); 
-            border: 2px solid var(--secondary); 
-            padding: 15px 15px 15px 35px; 
-            border-radius: 20px; 
-            text-align: center; 
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5); 
-            width: 180px; 
-            position: relative; 
-            z-index: 1;
-        }
+        .robo-dialog { background: rgba(34,34,34,0.95); border: 2px solid var(--secondary); padding: 15px 15px 15px 35px; border-radius: 20px; text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,0.5); width: 180px; position: relative; z-index: 1; }
         
-        #robo-menu { 
-            display: none; 
-            position: absolute; 
-            top: 40px; 
-            right: -90px; 
-            background: var(--panel-bg); 
-            border: 1px solid var(--secondary); 
-            border-radius: 10px; 
-            box-shadow: 0 10px 20px rgba(0,0,0,0.5); 
-            z-index: 2010; 
-            width: 150px; 
-            text-align: left; 
-            overflow: hidden;
-        }
-        .menu-item { 
-            padding: 12px 15px; 
-            font-size: 14px; 
-            font-weight: bold; 
-            cursor: pointer; 
-            border-bottom: 1px solid var(--border-color); 
-            color: var(--text-main); 
-            display: flex; 
-            align-items: center; 
-            gap: 10px;
-            transition: all 0.3s ease;
-        }
+        #robo-menu { display: none; position: absolute; top: 40px; right: -90px; background: var(--panel-bg); border: 1px solid var(--secondary); border-radius: 10px; box-shadow: 0 10px 20px rgba(0,0,0,0.5); z-index: 2010; width: 150px; text-align: left; overflow: hidden; }
+        .menu-item { padding: 12px 15px; font-size: 14px; font-weight: bold; cursor: pointer; border-bottom: 1px solid var(--border-color); color: var(--text-main); display: flex; align-items: center; gap: 10px; transition: all 0.3s ease; }
         .menu-item:hover { background: rgba(179,153,93,0.1); color: var(--secondary); }
-        .menu-row { display: flex; justify-content: space-between; padding: 8px; background: rgba(0,0,0,0.2);}
-        .btn-sz { 
-            flex: 1; 
-            border: 1px solid var(--border-color); 
-            background: rgba(255,255,255,0.05); 
-            color: var(--text-main);
-            border-radius: 5px; 
-            font-size: 12px; 
-            padding: 6px; 
-            margin: 0 3px; 
-            cursor: pointer; 
-            font-weight: bold; 
-            transition: all 0.3s ease;
-        }
+        .menu-row { display: flex; justify-content: space-between; padding: 8px; background: rgba(0,0,0,0.2); }
+        .btn-sz { flex: 1; border: 1px solid var(--border-color); background: rgba(255,255,255,0.05); color: var(--text-main); border-radius: 5px; font-size: 12px; padding: 6px; margin: 0 3px; cursor: pointer; font-weight: bold; transition: all 0.3s ease; }
         .btn-sz:hover { background: var(--secondary); color: var(--primary); border-color: var(--secondary); }
 
-        .close-btn { position: absolute; top: 10px; right: 20px; font-size: 30px; font-weight: bold; color: var(--border-color); cursor: pointer; transition: all 0.3s ease;}
+        .close-btn { position: absolute; top: 10px; right: 20px; font-size: 30px; font-weight: bold; color: var(--border-color); cursor: pointer; transition: all 0.3s ease; }
         .close-btn:hover { color: var(--secondary); }
-        .list-item { 
-            background: rgba(255,255,255,0.05); 
-            padding: 15px; 
-            border-radius: 10px; 
-            border: 1px solid var(--border-color); 
-            margin-bottom: 10px; 
-            font-size: 14px; 
-            font-weight: bold; 
-            display: flex; 
-            justify-content: space-between; 
-            align-items: center;
-        }
+        .list-item { background: rgba(255,255,255,0.05); padding: 15px; border-radius: 10px; border: 1px solid var(--border-color); margin-bottom: 10px; font-size: 14px; font-weight: bold; display: flex; justify-content: space-between; align-items: center; }
         
         .stats-box { border-top: 1px solid var(--border-color); margin-top: 10px; padding-top: 10px; font-size: 12px; font-weight: 800; display: flex; justify-content: space-around; }
-        .stats-tai { color: #A52A2A; } /* Đỏ nâu */
-        .stats-xiu { color: var(--secondary); }
+        .stats-tai { color: #A52A2A; }
+        .stats-xiu { color: #b3995d; }
     </style>
 </head>
 <body>
@@ -280,19 +78,17 @@
     <div id="game-overlay">
         <button class="close-game-btn" onclick="closeGame()"><i class="fas fa-times"></i> ĐÓNG GAME</button>
         <iframe id="game-frame" src=""></iframe>
-        
         <div id="draggable-robot" style="transform: scale(1);">
             <img class="robo-img" src="https://i.ibb.co/xSBDQyZ6/abaa4a293e48e74692059a84ad587f10.webp">
-            
             <div class="robo-dialog">
                 <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border-color); margin-bottom: 10px; padding-bottom: 5px;">
-                    <span id="robo-mode-title" style="font-size: 14px; font-weight: 900; color: var(--accent);">TOOL VIP</span>
-                    <i class="fas fa-bars" style="cursor: pointer; color: var(--secondary); font-size: 18px; padding: 0 5px;" onclick="toggleRoboMenu()"></i>
+                    <span id="robo-mode-title" style="font-size: 14px; font-weight: 900; color: #ffd700;">TOOL VIP</span>
+                    <i class="fas fa-bars" style="cursor: pointer; color: #b3995d; font-size: 18px; padding: 0 5px;" onclick="toggleRoboMenu()"></i>
                 </div>
                 
                 <div id="robo-menu">
-                    <div class="menu-item" onclick="switchRoboMode('tx')"><i class="fas fa-dice" style="color:var(--secondary)"></i> Soi Cầu</div>
-                    <div class="menu-item" onclick="switchRoboMode('md5')"><i class="fas fa-fingerprint" style="color:var(--accent)"></i> Tool MD5 VIP</div>
+                    <div class="menu-item" onclick="switchRoboMode('tx')"><i class="fas fa-dice" style="color:#b3995d"></i> Soi Cầu</div>
+                    <div class="menu-item" onclick="switchRoboMode('md5')"><i class="fas fa-fingerprint" style="color:#ffd700"></i> Tool MD5 VIP</div>
                     <div class="menu-row">
                         <button class="btn-sz" onclick="changeRoboSize(0.7)">Nhỏ</button>
                         <button class="btn-sz" onclick="changeRoboSize(1)">Vừa</button>
@@ -301,9 +97,9 @@
                 </div>
 
                 <div id="robo-view-auto">
-                    <div style="font-size: 12px; font-weight: 800; color: var(--text-main);" id="robo-subtitle">PHIÊN: <span id="robo-phien" style="color: var(--secondary);">...</span></div>
+                    <div style="font-size: 12px; font-weight: 800; color: #f0f0f0;" id="robo-subtitle">PHIÊN: <span id="robo-phien" style="color: #b3995d;">...</span></div>
                     <div id="robo-kq" style="font-size: 26px; font-family: 'Playfair Display', serif; font-weight: 900; padding: 5px 0;">SCAN</div>
-                    <div id="robo-tyle" style="color: var(--accent); font-size: 14px; font-weight: 800;">Đang dò API...</div>
+                    <div id="robo-tyle" style="color: #ffd700; font-size: 14px; font-weight: 800;">Đang dò API...</div>
                     <div class="stats-box" id="robo-thongke" style="display:none;">
                         <div class="stats-tai">TÀI: <span id="tk-tai">0</span></div>
                         <div class="stats-xiu">XỈU: <span id="tk-xiu">0</span></div>
@@ -311,8 +107,8 @@
                 </div>
 
                 <div id="robo-view-md5" style="display: none;">
-                    <input type="text" id="robo-md5-input" placeholder="Dán mã MD5..." style="width: 100%; padding: 10px; font-size: 12px; border: 1px solid var(--border-color); border-radius: 8px; margin-bottom: 10px; outline: none; font-weight: bold; text-align: center; background: rgba(0,0,0,0.2); color: var(--text-main);">
-                    <button style="width: 100%; padding: 10px; background: var(--secondary); color: var(--primary); border: none; border-radius: 8px; font-weight: bold; font-size: 12px; cursor: pointer; box-shadow: 0 4px 10px rgba(179,153,93,0.3);" onclick="analyzeMD5_Robo()">DỰ ĐOÁN MD5</button>
+                    <input type="text" id="robo-md5-input" placeholder="Dán mã MD5..." style="width: 100%; padding: 10px; font-size: 12px; border: 1px solid #444444; border-radius: 8px; margin-bottom: 10px; outline: none; font-weight: bold; text-align: center; background: rgba(0,0,0,0.2); color: #f0f0f0;">
+                    <button style="width: 100%; padding: 10px; background: #b3995d; color: #1a1a1a; border: none; border-radius: 8px; font-weight: bold; font-size: 12px; cursor: pointer; box-shadow: 0 4px 10px rgba(179,153,93,0.3);" onclick="analyzeMD5_Robo()">DỰ ĐOÁN MD5</button>
                 </div>
             </div>
         </div>
@@ -326,7 +122,7 @@
             <input type="password" id="auth-pass" class="input-box" placeholder="Mật khẩu...">
             <button class="cyber-btn" onclick="auth('login')">ĐĂNG NHẬP</button>
             <button class="cyber-btn btn-yellow" onclick="auth('register')">ĐĂNG KÝ MỚI</button>
-            <div id="auth-msg" style="margin-top: 15px; font-weight:bold; color: var(--secondary);"></div>
+            <div id="auth-msg" style="margin-top: 15px; font-weight:bold; color: #b3995d;"></div>
         </div>
     </div>
 
@@ -334,31 +130,30 @@
         <div class="logo"><i class="fas fa-crown"></i> HƯNG ADMIN</div>
         <div class="profile-badge" onclick="document.getElementById('profile-modal').style.display='flex'">
             <span id="header-user">User</span>
-            <span style="color: var(--accent);" id="header-bal">0 VNĐ</span>
+            <span style="color: #ffd700;" id="header-bal">0 VNĐ</span>
         </div>
     </header>
 
     <div id="main-dashboard">
         <div class="panel">
             <div class="panel-title" style="font-size: 1.8rem;"><i class="fas fa-gem"></i> KHO BẢO BỐI</div>
-            
             <div class="cate-title"><i class="fas fa-dice"></i> HỆ TÀI XỈU VIP</div>
             <button class="cyber-btn" onclick="openTool('lc79', 'TOOL LC79', 'https://lc79.bet')"><i class="fas fa-satellite-dish"></i> TOOL LC79.BET</button>
             <button class="cyber-btn btn-green" onclick="openTool('betvip', 'TOOL BETVIP', 'https://play.betvip.fit/')"><i class="fas fa-crown"></i> TOOL BETVIP</button>
-            
             <div class="cate-title"><i class="fas fa-fingerprint"></i> HỆ MÃ HÓA MD5</div>
             <button class="cyber-btn btn-yellow" onclick="openTool('md5', 'TOOL MD5 VIP', '')"><i class="fas fa-shield-alt"></i> TOOL MD5 (CHẠY ĐỘC LẬP)</button>
-
             <button class="cyber-btn btn-red" id="btn-admin-panel" style="display:none; margin-top: 30px;" onclick="loadAdminData()">⚙️ QUẢN TRỊ ADMIN</button>
         </div>
     </div>
 
-    <div id="profile-modal" class="modal-overlay" style="display:none;"><div class="modal-box"><div class="close-btn" onclick="this.parentElement.parentElement.style.display='none'">×</div><div class="panel-title">HỒ SƠ CỦA BẠN</div><div style="text-align:center; font-weight:bold; margin-bottom: 20px;">Tài khoản: <span id="pro-user" style="color:var(--secondary);"></span><br>Số dư: <span id="pro-bal" style="color:var(--accent); font-size:20px;"></span> VNĐ<br>HSD VIP: <span id="pro-vip" style="color:#008000;"></span></div><button class="cyber-btn btn-green" onclick="document.getElementById('deposit-modal').style.display='flex'">💵 NẠP THẺ CÀO</button><button class="cyber-btn btn-yellow" onclick="document.getElementById('store-modal').style.display='flex'">🛒 MUA GÓI VIP</button><button class="cyber-btn btn-red" onclick="logout()">ĐĂNG XUẤT</button></div></div>
+    <div id="profile-modal" class="modal-overlay" style="display:none;"><div class="modal-box"><div class="close-btn" onclick="this.parentElement.parentElement.style.display='none'">×</div><div class="panel-title">HỒ SƠ CỦA BẠN</div><div style="text-align:center; font-weight:bold; margin-bottom: 20px;">Tài khoản: <span id="pro-user" style="color:#b3995d;"></span><br>Số dư: <span id="pro-bal" style="color:#ffd700; font-size:20px;"></span> VNĐ<br>HSD VIP: <span id="pro-vip" style="color:#008000;"></span></div><button class="cyber-btn btn-green" onclick="document.getElementById('deposit-modal').style.display='flex'">💵 NẠP THẺ CÀO</button><button class="cyber-btn btn-yellow" onclick="document.getElementById('store-modal').style.display='flex'">🛒 MUA GÓI VIP</button><button class="cyber-btn btn-red" onclick="logout()">ĐĂNG XUẤT</button></div></div>
     <div id="deposit-modal" class="modal-overlay" style="display:none;"><div class="modal-box"><div class="close-btn" onclick="this.parentElement.parentElement.style.display='none'">×</div><div class="panel-title">NẠP THẺ CÀO</div><select id="dep-net" class="input-box"><option value="VIETTEL">Viettel</option><option value="VINAPHONE">Vinaphone</option><option value="MOBIFONE">Mobifone</option></select><select id="dep-amt" class="input-box"><option value="30000">30,000</option><option value="50000">50,000</option><option value="100000">100,000</option><option value="200000">200,000</option></select><input type="text" id="dep-pin" class="input-box" placeholder="Mã thẻ (PIN)"><input type="text" id="dep-seri" class="input-box" placeholder="Số Serial"><button class="cyber-btn btn-green" onclick="submitDeposit()">GỬI THẺ</button><div id="dep-msg" style="text-align:center; font-weight:bold;"></div></div></div>
     <div id="store-modal" class="modal-overlay" style="display:none;"><div class="modal-box"><div class="close-btn" onclick="this.parentElement.parentElement.style.display='none'">×</div><div class="panel-title">CỬA HÀNG VIP</div><div class="list-item">1 Ngày VIP (30K) <button class="cyber-btn btn-yellow" style="width:auto; margin:0; padding:8px 15px;" onclick="buyVIP('1D')">MUA</button></div><div class="list-item">3 Ngày VIP (50K) <button class="cyber-btn btn-yellow" style="width:auto; margin:0; padding:8px 15px;" onclick="buyVIP('3D')">MUA</button></div><div class="list-item">1 Tuần VIP (100K) <button class="cyber-btn btn-yellow" style="width:auto; margin:0; padding:8px 15px;" onclick="buyVIP('7D')">MUA</button></div><div class="list-item">1 Tháng VIP (150K) <button class="cyber-btn btn-yellow" style="width:auto; margin:0; padding:8px 15px;" onclick="buyVIP('30D')">MUA</button></div><div class="list-item">VĨNH VIỄN (200K) <button class="cyber-btn btn-red" style="width:auto; margin:0; padding:8px 15px;" onclick="buyVIP('PERM')">MUA</button></div></div></div>
-    <div id="admin-modal" class="modal-overlay" style="display:none;"><div class="modal-box" style="max-width: 500px;"><div class="close-btn" onclick="this.parentElement.parentElement.style.display='none'">×</div><div class="panel-title" style="color:var(--accent);">QUẢN TRỊ ADMIN</div><div style="max-height: 400px; overflow-y: auto;"><h3 style="margin    <script>
+    <div id="admin-modal" class="modal-overlay" style="display:none;"><div class="modal-box" style="max-width: 500px;"><div class="close-btn" onclick="this.parentElement.parentElement.style.display='none'">×</div><div class="panel-title" style="color:#ffd700;">QUẢN TRỊ ADMIN</div><div style="max-height: 400px; overflow-y: auto;"><h3 style="margin: 15px 0; color: #008000;">DUYỆT THẺ NẠP</h3><div id="admin-deps"></div><h3 style="margin: 15px 0; color: #b3995d;">QUẢN LÝ TÀI KHOẢN</h3><div id="admin-users"></div></div></div></div>
+    
+    <script>
         let myUser = ""; let myPass = ""; let scanInterval; let phienCu = ""; let isUserVIP = false; let activeGame = ""; 
-        let isSpamming = false; // Biến chống spam bấm liên tục
+        let isSpamming = false;
 
         async function auth(action) {
             if (isSpamming) {
@@ -388,7 +183,7 @@
                     }
                 } else { 
                     document.getElementById('auth-msg').innerText = json.msg; 
-                    document.getElementById('auth-msg').style.color = "var(--secondary)"; 
+                    document.getElementById('auth-msg').style.color = "#b3995d"; 
                 }
             } catch(e) {
                 document.getElementById('auth-msg').innerText = "Mất kết nối máy chủ!"; 
@@ -400,7 +195,7 @@
         
         async function loadProfile() { if(!myUser) return; let res = await fetch(`/api/user_info?username=${myUser}`); let json = await res.json(); if(json.status === "success") { isUserVIP = json.data.is_vip; let bal = json.data.balance.toLocaleString('vi-VN'); document.getElementById('header-user').innerText = myUser; document.getElementById('header-bal').innerText = bal + "đ"; document.getElementById('pro-user').innerText = myUser; document.getElementById('pro-bal').innerText = bal; document.getElementById('pro-vip').innerText = json.data.vip_expire; } }
         
-        async function submitDeposit() { let net = document.getElementById('dep-net').value; let amt = document.getElementById('dep-amt').value; let pin = document.getElementById('dep-pin').value; let seri = document.getElementById('dep-seri').value; if(!pin || !seri) { document.getElementById('dep-msg').innerText = "Nhập đủ PIN và Seri!"; return; } let res = await fetch('/api/deposit', { method: 'POST', headers: {'Content-Type':'application/json'}, body: JSON.stringify({username:myUser, network:net, amount:parseInt(amt), pin:pin, serial:seri})}); let json = await res.json(); document.getElementById('dep-msg').innerText = json.msg; document.getElementById('dep-msg').style.color = json.status==="success"?"#008000":"var(--secondary)"; }
+        async function submitDeposit() { let net = document.getElementById('dep-net').value; let amt = document.getElementById('dep-amt').value; let pin = document.getElementById('dep-pin').value; let seri = document.getElementById('dep-seri').value; if(!pin || !seri) { document.getElementById('dep-msg').innerText = "Nhập đủ PIN và Seri!"; return; } let res = await fetch('/api/deposit', { method: 'POST', headers: {'Content-Type':'application/json'}, body: JSON.stringify({username:myUser, network:net, amount:parseInt(amt), pin:pin, serial:seri})}); let json = await res.json(); document.getElementById('dep-msg').innerText = json.msg; document.getElementById('dep-msg').style.color = json.status==="success"?"#008000":"#b3995d"; }
         
         async function buyVIP(pkg) { if(!confirm("Xác nhận mua gói VIP này?")) return; let res = await fetch('/api/buy_vip', { method: 'POST', headers: {'Content-Type':'application/json'}, body: JSON.stringify({username:myUser, package:pkg})}); let json = await res.json(); alert(json.msg); loadProfile(); }
 
@@ -449,7 +244,7 @@
                     document.getElementById('robo-phien').innerText = "#" + data.phien;
                     let el = document.getElementById('robo-kq'); el.innerText = data.du_doan; 
                     document.getElementById('robo-tyle').innerText = "WIN: " + data.ti_le + "%";
-                    el.style.color = data.du_doan === "TÀI" ? "#A52A2A" : (data.du_doan === "XỈU" ? "var(--secondary)" : "var(--text-main)");
+                    el.style.color = data.du_doan === "TÀI" ? "#A52A2A" : (data.du_doan === "XỈU" ? "#b3995d" : "#f0f0f0");
                     if(data.tong_tai !== undefined && data.tong_xiu !== undefined) {
                         document.getElementById('robo-thongke').style.display = 'flex';
                         document.getElementById('tk-tai').innerText = data.tong_tai; document.getElementById('tk-xiu').innerText = data.tong_xiu;
@@ -466,9 +261,9 @@
             let sum1 = parseInt(part1, 16) % 100; let sum2 = parseInt(part2, 16) % 100; let sum3 = parseInt(part3, 16) % 100;
             let finalScore = (sum1 + sum2 + sum3) / 3; let isTai = (finalScore > 50); let ti_le = 85 + (finalScore % 14) + (Math.random() * 0.9);
             document.getElementById('robo-view-md5').style.display = 'none'; document.getElementById('robo-view-auto').style.display = 'block'; document.getElementById('robo-thongke').style.display = 'none';
-            document.getElementById('robo-subtitle').innerHTML = 'KẾT QUẢ MD5 <i class="fas fa-redo" style="cursor:pointer; color:var(--accent);" onclick="switchRoboMode(\'md5\')"></i>';
+            document.getElementById('robo-subtitle').innerHTML = 'KẾT QUẢ MD5 <i class="fas fa-redo" style="cursor:pointer; color:#ffd700;" onclick="switchRoboMode(\'md5\')"></i>';
             let el = document.getElementById('robo-kq'); el.innerText = isTai ? "TÀI" : "XỈU"; document.getElementById('robo-tyle').innerText = "WIN: " + ti_le.toFixed(1) + "%";
-            el.style.color = isTai ? "#A52A2A" : "var(--secondary)";
+            el.style.color = isTai ? "#A52A2A" : "#b3995d";
         }
 
         dragElement(document.getElementById("draggable-robot"));
@@ -486,5 +281,4 @@
         async function doAdmin(act, target, dep_id, amt) { await fetch('/api/admin/action', { method: 'POST', headers: {'Content-Type':'application/json'}, body: JSON.stringify({admin:myUser, action:act, target:target, dep_id:dep_id, amount:amt})}); loadAdminData(); }
     </script>
 </body>
-    </html>
-        
+</html>
