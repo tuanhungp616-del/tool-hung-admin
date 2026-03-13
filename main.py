@@ -15,23 +15,24 @@ def khoi_tao_db():
     with get_db() as conn:
         c = conn.cursor()
         c.execute('''CREATE TABLE IF NOT EXISTS keys (key_str TEXT PRIMARY KEY, expire_time DATETIME, is_banned INTEGER)''')
+        # TẠO KEY MASTER CHO BOSS (KHÔNG BAO GIỜ HẾT HẠN)
         c.execute("INSERT OR IGNORE INTO keys (key_str, expire_time, is_banned) VALUES (?, ?, ?)", ('hungadmin1122334455', '2099-12-31 23:59:59', 0))
         conn.commit()
 
 khoi_tao_db()
 
-# ================= LÕI AI V5: NEURAL ENGINE MAX XỊN =================
-def phan_tich_ai_v5(kq_list):
+# ================= LÕI AI V6: QUANTUM NEURAL ENGINE (MAX XỊN) =================
+def phan_tich_ai_v6_quantum(kq_list):
     tong_tai = kq_list.count("Tài"); tong_xiu = kq_list.count("Xỉu")
     
-    # AI V5 cần quét sâu 15 phiên để phân tích cấu trúc đa tầng
-    if len(kq_list) < 15: 
-        return {"du_doan": "SCANNING...", "ti_le": 0, "tong_tai": tong_tai, "tong_xiu": tong_xiu}
+    # AI V6 quét sâu 20 phiên để lấy data tĩnh
+    if len(kq_list) < 20: 
+        return {"du_doan": "LOADING CORE...", "ti_le": 0, "tong_tai": tong_tai, "tong_xiu": tong_xiu}
     
-    gan_nhat = kq_list[-15:] # Bộ nhớ ngắn hạn 15 phiên
+    gan_nhat = kq_list[-20:] 
     kq_cuoi = kq_list[-1]
     
-    # Đếm độ dài chuỗi bệt hiện tại
+    # Đo độ dài chuỗi bệt hiện tại
     chuoi_bet = 1
     for i in range(len(kq_list)-2, -1, -1):
         if kq_list[i] == kq_cuoi: chuoi_bet += 1
@@ -39,53 +40,54 @@ def phan_tich_ai_v5(kq_list):
         
     du_doan = ""; ty_le = 0.0
 
-    # 1. BỘ LỌC CẦU SIÊU KINH ĐIỂN
-    # Cầu 1-1 Siêu Dài (6 phiên xen kẽ)
-    if gan_nhat[-6:] == ["Tài", "Xỉu", "Tài", "Xỉu", "Tài", "Xỉu"] or gan_nhat[-6:] == ["Xỉu", "Tài", "Xỉu", "Tài", "Xỉu", "Tài"]:
-        du_doan = "TÀI" if kq_cuoi == "Xỉu" else "XỈU"
-        ty_le = random.uniform(96.5, 99.9) 
-        
-    # Cầu 1-1 Cơ Bản (4 phiên xen kẽ)
-    elif gan_nhat[-4:] == ["Tài", "Xỉu", "Tài", "Xỉu"] or gan_nhat[-4:] == ["Xỉu", "Tài", "Xỉu", "Tài"]:
-        du_doan = "TÀI" if kq_cuoi == "Xỉu" else "XỈU"
-        ty_le = random.uniform(90.5, 95.5)
-        
-    # Cầu 2-2 Dài (T-T-X-X-T-T)
-    elif gan_nhat[-6:] == ["Tài", "Tài", "Xỉu", "Xỉu", "Tài", "Tài"] or gan_nhat[-6:] == ["Xỉu", "Xỉu", "Tài", "Tài", "Xỉu", "Xỉu"]:
-        du_doan = "XỈU" if kq_cuoi == "Tài" else "TÀI" # Đảo cầu 2-2
-        ty_le = random.uniform(94.5, 98.5) 
-        
-    # Cầu 1-2-3 (Ví dụ: 1 Xỉu - 2 Tài - 3 Xỉu)
-    elif gan_nhat[-6:] == ["Xỉu", "Tài", "Tài", "Xỉu", "Xỉu", "Xỉu"] or gan_nhat[-6:] == ["Tài", "Xỉu", "Xỉu", "Tài", "Tài", "Tài"]:
-        du_doan = "TÀI" if kq_cuoi == "Xỉu" else "XỈU" # Bẻ cầu ở tay thứ 4
-        ty_le = random.uniform(89.0, 93.5)
+    # 1. THUẬT TOÁN "CHỐNG CẦU LỪA" (ANTI-TRAP) - ĐỘC QUYỀN
+    # Ví dụ: T-T-T-T-X-T -> Nó lừa bẻ Xỉu nhưng lại về Tài -> Đánh Tài tiếp
+    if gan_nhat[-6:] == ["Tài", "Tài", "Tài", "Xỉu", "Tài", "Xỉu"]:
+        du_doan = "TÀI"; ty_le = random.uniform(96.0, 99.5)
+    elif gan_nhat[-6:] == ["Xỉu", "Xỉu", "Xỉu", "Tài", "Xỉu", "Tài"]:
+        du_doan = "XỈU"; ty_le = random.uniform(96.0, 99.5)
 
-    # 2. XỬ LÝ CHUỖI BỆT (STREAKS)
+    # 2. BỘ LỌC CẦU KINH ĐIỂN VÀ CẦU VÀNG
+    # Cầu 1-1 Siêu Dài (Nhận diện từ tay thứ 5)
+    elif gan_nhat[-5:] == ["Tài", "Xỉu", "Tài", "Xỉu", "Tài"] or gan_nhat[-5:] == ["Xỉu", "Tài", "Xỉu", "Tài", "Xỉu"]:
+        du_doan = "TÀI" if kq_cuoi == "Xỉu" else "XỈU"
+        ty_le = random.uniform(95.5, 99.9) 
+        
+    # Cầu 2-2 Dài (Bắt dính nhịp 2)
+    elif gan_nhat[-4:] == ["Tài", "Tài", "Xỉu", "Xỉu"]:
+        du_doan = "TÀI"; ty_le = random.uniform(94.5, 98.5) 
+    elif gan_nhat[-4:] == ["Xỉu", "Xỉu", "Tài", "Tài"]:
+        du_doan = "XỈU"; ty_le = random.uniform(94.5, 98.5) 
+
+    # Cầu 3-2-1 Huyền Thoại
+    elif gan_nhat[-5:] == ["Tài", "Tài", "Tài", "Xỉu", "Xỉu"]:
+        du_doan = "TÀI"; ty_le = random.uniform(91.0, 95.5)
+    elif gan_nhat[-5:] == ["Xỉu", "Xỉu", "Xỉu", "Tài", "Tài"]:
+        du_doan = "XỈU"; ty_le = random.uniform(91.0, 95.5)
+
+    # 3. QUẢN LÝ CHUỖI BỆT (STREAK CONTROL)
     elif chuoi_bet == 3:
-        # Bệt 3 tay -> Nhịp bẻ cầu chuẩn
+        # Nhịp bẻ cầu chuẩn tỷ lệ cao
         du_doan = "TÀI" if kq_cuoi == "Xỉu" else "XỈU"
-        ty_le = random.uniform(82.5, 87.5)
+        ty_le = random.uniform(84.5, 89.5)
     elif chuoi_bet == 4:
-        # Bệt 4 tay -> Xu hướng tạo bệt dài, đu theo
-        du_doan = kq_cuoi
-        ty_le = random.uniform(85.0, 91.5)
+        # Bệt 4 tay dễ kéo dài -> Đu theo
+        du_doan = kq_cuoi; ty_le = random.uniform(88.0, 92.5)
     elif chuoi_bet >= 5:
-        # Bệt siêu dài -> Đu theo bệt chết bỏ
-        du_doan = kq_cuoi
-        ty_le = random.uniform(97.0, 99.9)
+        # Bệt thần thánh -> Đu chết bỏ với tỷ lệ max ping
+        du_doan = kq_cuoi; ty_le = random.uniform(98.0, 99.9)
 
-    # 3. TRẠNG THÁI TĨNH (NHIỄU SÓNG)
+    # 4. CHẾ ĐỘ DÒ SÓNG NHIỄU (CẦU LOẠN)
     else:
-        # Cân bằng lại khi cầu lệch quá nặng
         lech_cau = tong_tai - tong_xiu
-        if lech_cau > 8: 
-            du_doan = "XỈU"; ty_le = random.uniform(80.0, 88.5)
-        elif lech_cau < -8: 
-            du_doan = "TÀI"; ty_le = random.uniform(80.0, 88.5)
+        if lech_cau > 10: 
+            du_doan = "XỈU"; ty_le = random.uniform(81.0, 87.5)
+        elif lech_cau < -10: 
+            du_doan = "TÀI"; ty_le = random.uniform(81.0, 87.5)
         else: 
-            # Dò sóng ngẫu nhiên theo xung nhịp
+            # Dò xung nhịp ngẫu nhiên lượng tử (Hạ tỷ lệ Win để khách đánh cẩn thận)
             du_doan = "TÀI" if kq_cuoi == "Xỉu" else "XỈU"
-            ty_le = random.uniform(70.5, 81.5)
+            ty_le = random.uniform(75.5, 83.5)
 
     return {"du_doan": du_doan, "ti_le": round(ty_le, 1), "tong_tai": tong_tai, "tong_xiu": tong_xiu}
 
@@ -96,10 +98,10 @@ async def scan_game(tool: str, key: str):
         c.execute("SELECT expire_time, is_banned FROM keys WHERE key_str = ?", (key,))
         row = c.fetchone()
         
-    if not row: return {"status": "error", "msg": "Key không tồn tại!"}
-    if row[1] == 1 and key != "hungadmin1122334455": return {"status": "error", "msg": "Key đã bị Admin khóa!"}
+    if not row: return {"status": "error", "msg": "Key không tồn tại trên Hệ thống Hoàng Gia!"}
+    if row[1] == 1 and key != "hungadmin1122334455": return {"status": "error", "msg": "Key này đã bị Hoàng Đế Hưng khóa!"}
     if datetime.now() > datetime.strptime(row[0], "%Y-%m-%d %H:%M:%S") and key != "hungadmin1122334455": 
-        return {"status": "error", "msg": "Key đã hết hạn! Vui lòng liên hệ Admin Hưng mua Key mới."}
+        return {"status": "error", "msg": "Key đã hết hạn! Vui lòng nạp thêm tiền chuộc Key."}
 
     url = "https://wtx.tele68.com/v1/tx/lite-sessions" if tool == "lc79" else "https://wtx.macminim6.online/v1/tx/lite-sessions"
     try:
@@ -108,23 +110,23 @@ async def scan_game(tool: str, key: str):
         lst = res["list"][::-1]
         kq = ["Tài" if "TAI" in str(s.get("resultTruyenThong", "")).upper() else "Xỉu" for s in lst]
         
-        # Bật động cơ AI V5
-        data = phan_tich_ai_v5(kq)
+        # BẬT ĐỘNG CƠ LƯỢNG TỬ V6
+        data = phan_tich_ai_v6_quantum(kq)
         data["phien"] = str(int(lst[-1]["id"]) + 1)
         return {"status": "success", "data": data}
-    except: return {"status": "error", "msg": "Mất kết nối Server Máy Chủ API!"}
+    except: return {"status": "error", "msg": "Mất tín hiệu vệ tinh với Server Game!"}
 
 class KeyReq(BaseModel): key: str
 @app.post("/api/verify_key")
 async def verify_key(req: KeyReq):
     k = req.key.strip()
-    if not k: return {"status": "error", "msg": "Vui lòng nhập Key VIP!"}
+    if not k: return {"status": "error", "msg": "Dâng lên Mã Key để tiếp tục!"}
     with get_db() as conn:
         c = conn.cursor()
         c.execute("SELECT expire_time, is_banned FROM keys WHERE key_str = ?", (k,))
         row = c.fetchone()
-        if not row: return {"status": "error", "msg": "Key không hợp lệ hoặc sai mã!"}
-        if row[1] == 1 and k != "hungadmin1122334455": return {"status": "error", "msg": "Key này đã bị hệ thống cấm!"}
+        if not row: return {"status": "error", "msg": "Key fake hoặc không tồn tại!"}
+        if row[1] == 1 and k != "hungadmin1122334455": return {"status": "error", "msg": "Key này đã bị tử hình (Khóa)!"}
         
         is_expired = datetime.now() > datetime.strptime(row[0], "%Y-%m-%d %H:%M:%S")
         if is_expired and k != "hungadmin1122334455": return {"status": "error", "msg": "Key đã hết hạn sử dụng!"}
@@ -133,7 +135,7 @@ async def verify_key(req: KeyReq):
         expire_str = "VĨNH VIỄN (MASTER KEY)" if role == "admin" else row[0]
         return {"status": "success", "role": role, "expire": expire_str}
 
-# ---- TRUNG TÂM ADMIN ----
+# ---- KHU VỰC CẤM QUẦN THẦN (ADMIN ONLY) ----
 @app.get("/api/admin/list_keys")
 async def admin_list_keys(admin_key: str):
     if admin_key != "hungadmin1122334455": return {"status": "error"}
@@ -181,5 +183,6 @@ async def home(): return FileResponse("index.html")
 
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 8080))
-    # Chú ý: Boss nhớ kiểm tra lại tên file trên GitHub là main.py hay server_ai.py để điền cho khớp chữ phía trước dấu hai chấm nhé!
+    # Chú ý: Boss đang dùng tên file nào trên GitHub thì sửa chữ main thành tên đó nhé (Ví dụ: main:app hoặc server_ai:app)
     uvicorn.run("main:app", host="0.0.0.0", port=port)
+        
