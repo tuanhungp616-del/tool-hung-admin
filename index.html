@@ -21,6 +21,8 @@
         
         header { height: 75px; background: var(--primary); border-bottom: 2px solid var(--secondary); display: flex; justify-content: space-between; align-items: center; padding: 0 20px; position: sticky; top: 0; z-index: 100; box-shadow: 0 5px 15px rgba(0,0,0,0.5); }
         .logo { display: flex; align-items: center; gap: 10px; font-family: 'Playfair Display', serif; font-size: 1.5rem; font-weight: 900; color: var(--secondary); text-shadow: 1px 1px 2px rgba(255,215,0,0.3); }
+        .logo-img { width: 45px; height: 45px; border-radius: 50%; border: 2px solid var(--accent); object-fit: cover; box-shadow: 0 0 10px rgba(255,215,0,0.5); }
+        
         .profile-badge { background: rgba(179,153,93,0.1); border: 1px solid var(--secondary); color: var(--secondary); padding: 8px 15px; border-radius: 20px; font-size: 14px; font-weight: bold; cursor: pointer; display: flex; flex-direction: column; align-items: flex-end; transition: all 0.3s ease; }
         .profile-badge:hover { background: rgba(179,153,93,0.2); box-shadow: 0 0 10px rgba(179,153,93,0.5); }
         
@@ -82,7 +84,7 @@
             <img class="robo-img" src="https://i.ibb.co/xSBDQyZ6/abaa4a293e48e74692059a84ad587f10.webp">
             <div class="robo-dialog">
                 <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border-color); margin-bottom: 10px; padding-bottom: 5px;">
-                    <span id="robo-mode-title" style="font-size: 14px; font-weight: 900; color: #ffd700;">TOOL VIP</span>
+                    <span id="robo-mode-title" style="font-size: 14px; font-weight: 900; color: #ffd700;">HỆ THỐNG AI VIP</span>
                     <i class="fas fa-bars" style="cursor: pointer; color: #b3995d; font-size: 18px; padding: 0 5px;" onclick="toggleRoboMenu()"></i>
                 </div>
                 
@@ -116,18 +118,24 @@
 
     <div id="auth-wrapper">
         <div class="auth-box" style="text-align: center;">
-            <div class="logo" style="justify-content: center; margin-bottom: 20px; font-size: 2rem;"><i class="fas fa-crown"></i> LUXURY EDITION</div>
-            <div class="panel-title" style="border:none;">HỆ THỐNG TOOL VIP</div>
+            <div class="logo" style="justify-content: center; margin-bottom: 15px; font-size: 1.5rem;">
+                <img class="logo-img" src="https://i.postimg.cc/2jBwCsNG/4a639cfd183e39288922e780831abcd7.webp" style="width: 70px; height: 70px;">
+            </div>
+            <div class="panel-title" style="border:none; margin-bottom: 15px; font-size: 1.4rem;">AI SYSTEM VIP</div>
+            
             <input type="text" id="auth-user" class="input-box" placeholder="Tài khoản...">
             <input type="password" id="auth-pass" class="input-box" placeholder="Mật khẩu...">
             <button class="cyber-btn" onclick="auth('login')">ĐĂNG NHẬP</button>
-            <button class="cyber-btn btn-yellow" onclick="auth('register')">ĐĂNG KÝ MỚI</button>
+            <button class="cyber-btn btn-yellow" onclick="auth('register')">ĐĂNG KÝ TÀI KHOẢN MỚI</button>
             <div id="auth-msg" style="margin-top: 15px; font-weight:bold; color: #b3995d;"></div>
         </div>
     </div>
 
     <header id="main-header" style="display:none;">
-        <div class="logo"><i class="fas fa-crown"></i> HƯNG ADMIN</div>
+        <div class="logo">
+            <img class="logo-img" src="https://i.postimg.cc/2jBwCsNG/4a639cfd183e39288922e780831abcd7.webp">
+            HƯNG ADMIN
+        </div>
         <div class="profile-badge" onclick="document.getElementById('profile-modal').style.display='flex'">
             <span id="header-user">User</span>
             <span style="color: #ffd700;" id="header-bal">0 VNĐ</span>
@@ -136,7 +144,7 @@
 
     <div id="main-dashboard">
         <div class="panel">
-            <div class="panel-title" style="font-size: 1.8rem;"><i class="fas fa-gem"></i> KHO BẢO BỐI</div>
+            <div class="panel-title" style="font-size: 1.8rem;"><i class="fas fa-gem"></i> KHO BẢO BỐI AI</div>
             <div class="cate-title"><i class="fas fa-dice"></i> HỆ TÀI XỈU VIP</div>
             <button class="cyber-btn" onclick="openTool('lc79', 'TOOL LC79', 'https://lc79.bet')"><i class="fas fa-satellite-dish"></i> TOOL LC79.BET</button>
             <button class="cyber-btn btn-green" onclick="openTool('betvip', 'TOOL BETVIP', 'https://play.betvip.fit/')"><i class="fas fa-crown"></i> TOOL BETVIP</button>
@@ -150,14 +158,13 @@
     <div id="deposit-modal" class="modal-overlay" style="display:none;"><div class="modal-box"><div class="close-btn" onclick="this.parentElement.parentElement.style.display='none'">×</div><div class="panel-title">NẠP THẺ CÀO</div><select id="dep-net" class="input-box"><option value="VIETTEL">Viettel</option><option value="VINAPHONE">Vinaphone</option><option value="MOBIFONE">Mobifone</option></select><select id="dep-amt" class="input-box"><option value="30000">30,000</option><option value="50000">50,000</option><option value="100000">100,000</option><option value="200000">200,000</option></select><input type="text" id="dep-pin" class="input-box" placeholder="Mã thẻ (PIN)"><input type="text" id="dep-seri" class="input-box" placeholder="Số Serial"><button class="cyber-btn btn-green" onclick="submitDeposit()">GỬI THẺ</button><div id="dep-msg" style="text-align:center; font-weight:bold;"></div></div></div>
     <div id="store-modal" class="modal-overlay" style="display:none;"><div class="modal-box"><div class="close-btn" onclick="this.parentElement.parentElement.style.display='none'">×</div><div class="panel-title">CỬA HÀNG VIP</div><div class="list-item">1 Ngày VIP (30K) <button class="cyber-btn btn-yellow" style="width:auto; margin:0; padding:8px 15px;" onclick="buyVIP('1D')">MUA</button></div><div class="list-item">3 Ngày VIP (50K) <button class="cyber-btn btn-yellow" style="width:auto; margin:0; padding:8px 15px;" onclick="buyVIP('3D')">MUA</button></div><div class="list-item">1 Tuần VIP (100K) <button class="cyber-btn btn-yellow" style="width:auto; margin:0; padding:8px 15px;" onclick="buyVIP('7D')">MUA</button></div><div class="list-item">1 Tháng VIP (150K) <button class="cyber-btn btn-yellow" style="width:auto; margin:0; padding:8px 15px;" onclick="buyVIP('30D')">MUA</button></div><div class="list-item">VĨNH VIỄN (200K) <button class="cyber-btn btn-red" style="width:auto; margin:0; padding:8px 15px;" onclick="buyVIP('PERM')">MUA</button></div></div></div>
     <div id="admin-modal" class="modal-overlay" style="display:none;"><div class="modal-box" style="max-width: 500px;"><div class="close-btn" onclick="this.parentElement.parentElement.style.display='none'">×</div><div class="panel-title" style="color:#ffd700;">QUẢN TRỊ ADMIN</div><div style="max-height: 400px; overflow-y: auto;"><h3 style="margin: 15px 0; color: #008000;">DUYỆT THẺ NẠP</h3><div id="admin-deps"></div><h3 style="margin: 15px 0; color: #b3995d;">QUẢN LÝ TÀI KHOẢN</h3><div id="admin-users"></div></div></div></div>
-    
-    <script>
+        <script>
         let myUser = ""; let myPass = ""; let scanInterval; let phienCu = ""; let isUserVIP = false; let activeGame = ""; 
         let isSpamming = false;
 
         async function auth(action) {
             if (isSpamming) {
-                document.getElementById('auth-msg').innerText = "Vui lòng đợi 3 giây...";
+                document.getElementById('auth-msg').innerText = "Hệ thống AI đang xử lý... Đợi 3 giây!";
                 document.getElementById('auth-msg').style.color = "orange";
                 return;
             }
@@ -171,7 +178,7 @@
                 let json = await res.json();
                 if (json.status === "success") {
                     if (action === "register") { 
-                        document.getElementById('auth-msg').innerText = json.msg; 
+                        document.getElementById('auth-msg').innerText = "Tạo tài khoản thành công! Hãy Đăng Nhập."; 
                         document.getElementById('auth-msg').style.color = "#008000"; 
                     } else {
                         myUser = u; myPass = p;
@@ -186,7 +193,7 @@
                     document.getElementById('auth-msg').style.color = "#b3995d"; 
                 }
             } catch(e) {
-                document.getElementById('auth-msg').innerText = "Mất kết nối máy chủ!"; 
+                document.getElementById('auth-msg').innerText = "Mất kết nối máy chủ AI!"; 
                 document.getElementById('auth-msg').style.color = "red";
             }
         }
@@ -200,7 +207,7 @@
         async function buyVIP(pkg) { if(!confirm("Xác nhận mua gói VIP này?")) return; let res = await fetch('/api/buy_vip', { method: 'POST', headers: {'Content-Type':'application/json'}, body: JSON.stringify({username:myUser, package:pkg})}); let json = await res.json(); alert(json.msg); loadProfile(); }
 
         function openTool(gameTarget, titleName, url) {
-            if (!isUserVIP && myUser !== 'hungadmin11') { alert("⛔ GÓI VIP ĐÃ HẾT HẠN HOẶC CHƯA KÍCH HOẠT!\nVui lòng vào Hồ Sơ -> MUA GÓI VIP để tiếp tục sử dụng bảo bối!"); return; }
+            if (!isUserVIP && myUser !== 'hungadmin11') { alert("⛔ GÓI VIP ĐÃ HẾT HẠN HOẶC CHƯA KÍCH HOẠT!\nVui lòng vào Hồ Sơ -> MUA GÓI VIP để tiếp tục sử dụng AI!"); return; }
             if (gameTarget !== 'md5') { activeGame = gameTarget; }
             phienCu = ""; clearInterval(scanInterval);
             document.getElementById('robo-mode-title').innerText = titleName;
@@ -212,7 +219,7 @@
             } else {
                 document.getElementById('robo-view-auto').style.display = 'block'; document.getElementById('robo-view-md5').style.display = 'none';
                 document.getElementById('robo-subtitle').innerHTML = 'PHIÊN: <span id="robo-phien">...</span>';
-                document.getElementById('robo-kq').innerText = "SCANNING"; document.getElementById('robo-tyle').innerText = "Đang dò API..."; document.getElementById('robo-thongke').style.display = 'none';
+                document.getElementById('robo-kq').innerText = "SCANNING"; document.getElementById('robo-tyle').innerText = "Đang phân tích..."; document.getElementById('robo-thongke').style.display = 'none';
                 getSignalTX(); scanInterval = setInterval(getSignalTX, 2000); 
             }
         }
@@ -229,7 +236,7 @@
                 document.getElementById('robo-mode-title').innerText = (activeGame === 'lc79') ? 'TOOL LC79' : 'TOOL BETVIP';
                 document.getElementById('robo-view-auto').style.display = 'block'; document.getElementById('robo-view-md5').style.display = 'none';
                 document.getElementById('robo-subtitle').innerHTML = 'PHIÊN: <span id="robo-phien">...</span>';
-                document.getElementById('robo-kq').innerText = "SCANNING"; document.getElementById('robo-tyle').innerText = "Đang dò API..."; document.getElementById('robo-thongke').style.display = 'none';
+                document.getElementById('robo-kq').innerText = "SCANNING"; document.getElementById('robo-tyle').innerText = "Đang phân tích..."; document.getElementById('robo-thongke').style.display = 'none';
                 getSignalTX(); scanInterval = setInterval(getSignalTX, 2000);
             }
         }
