@@ -74,7 +74,7 @@
         <iframe id="game-frame" src=""></iframe>
         <div id="draggable-robot" style="transform: scale(1);">
             
-            <img class="robo-img" src="LINK_ANH_ROBOT_CUA_BOSS_O_DAY">
+            <img class="robo-img" src="https://i.postimg.cc/wMdhjZFJ/1773446152525.png">
             
             <div class="robo-dialog">
                 <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--secondary); margin-bottom: 10px; padding-bottom: 5px;">
@@ -113,7 +113,7 @@
     <div id="auth-wrapper">
         <div class="auth-box">
             <div class="logo" style="justify-content: center; margin-bottom: 15px; font-size: 2rem;">
-                <i class="fas fa-crown" style="font-size: 2.5rem; text-shadow: 0 0 20px var(--secondary);"></i>
+                <img class="logo-img" src="https://i.postimg.cc/wMdhjZFJ/1773446152525.png" style="width: 80px; height: 80px;">
             </div>
             <div class="panel-title" style="border:none; margin-bottom: 25px; font-size: 1.8rem; text-shadow: 0 0 15px var(--secondary);">KING VIP ACCESS</div>
             
@@ -126,7 +126,7 @@
 
     <header id="main-header" style="display:none;">
         <div class="logo">
-            <i class="fas fa-crown"></i> HƯNG ADMIN
+            <img class="logo-img" src="https://i.postimg.cc/wMdhjZFJ/1773446152525.png" style="width: 35px; height: 35px;"> HƯNG ADMIN
         </div>
         <div class="profile-badge">
             <div style="color: #fff;">TRẠNG THÁI: <span style="color: #00ff00; text-shadow: 0 0 5px #00ff00;">ĐÃ KÍCH HOẠT</span></div>
@@ -166,12 +166,12 @@
             <h3 style="margin: 15px 0; color: var(--secondary); text-align: left; font-family: 'Playfair Display';">KHO KEY ĐÃ CẤP</h3>
             <div id="admin-keys" style="max-height: 250px; overflow-y: auto; text-align: left;"></div>
         </div>
-    </div>
-        <script>
+                </div>
+                    <script>
         let currentKey = localStorage.getItem("royal_key") || ""; 
         let scanInterval; let phienCu = ""; let activeGame = ""; 
         let isSpamming = false;
-        let isPredicting = false; // Khóa 5 giây
+        let isPredicting = false; 
 
         if(currentKey) { 
             document.getElementById('auth-key').value = currentKey;
@@ -262,7 +262,7 @@
         }
 
         async function getSignalTX() {
-            if (isPredicting) return; // Đang delay 5s thì nghỉ ngơi
+            if (isPredicting) return; 
             let apiTarget = (activeGame === 'lc79') ? 'lc79' : 'vip';
             try {
                 let res = await fetch(`/api/scan?tool=${apiTarget}&key=${currentKey}`); let json = await res.json();
@@ -274,7 +274,6 @@
                 }
                 let data = json.data;
                 if(data.phien !== phienCu) {
-                    // CÓ PHIÊN MỚI -> VÀO CHẾ ĐỘ CHẢNH CHỌE 5 GIÂY
                     isPredicting = true;
                     phienCu = data.phien; 
                     document.getElementById('robo-phien').innerText = "#" + data.phien;
@@ -287,7 +286,6 @@
                     tyleEl.innerText = "Đợi bố chút... đang nâng cấp tool xịn!";
                     document.getElementById('robo-thongke').style.display = 'none';
 
-                    // NGÂM 5 GIÂY XONG BUNG LỤA KẾT QUẢ V6
                     setTimeout(() => {
                         el.innerText = data.du_doan; 
                         tyleEl.innerText = "WIN: " + data.ti_le + "%";
@@ -316,7 +314,6 @@
             let el = document.getElementById('robo-kq'); 
             let tyleEl = document.getElementById('robo-tyle');
             
-            // DELAY 5S CHẢNH CHỌE CHO MD5
             el.innerText = "⏳ SCAN...";
             el.style.color = "var(--secondary)";
             tyleEl.innerText = "Đợi bố chút... đang nâng cấp tool xịn!";
