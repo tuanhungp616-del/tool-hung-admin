@@ -3,310 +3,534 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>KING AI SYSTEM - 8 CỔNG GAME V6</title>
+    <title>HUNGCUTO ENTERPRISE V19</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Nunito:wght@400;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Nunito:wght@700;900&family=Share+Tech+Mono&display=swap" rel="stylesheet">
     <style>
-        :root { 
-            --primary: #0a0a0a; var(--secondary: #FFD700); --secondary: #FFD700; --accent: #DAA520; 
-            --robot-glow: #00f2fe; --text-main: #ffffff; 
-            --bg-gradient: radial-gradient(circle at center, #2e2400 0%, #000000 100%); 
-            --panel-bg: rgba(15, 10, 0, 0.85); --border-color: #B8860B; 
-        }
+        :root { --gold: #FFD700; --red: #ff2a2a; --bg: #070707; --panel: rgba(10, 5, 15, 0.9); --cyan: #00ffff; --matrix: #0f0;}
         * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
-        body { font-family: 'Nunito', sans-serif; background: var(--bg-gradient); color: var(--text-main); overflow-x: hidden; min-height: 100vh; }
-        header { height: 75px; background: var(--panel-bg); border-bottom: 2px solid var(--secondary); display: flex; justify-content: space-between; align-items: center; padding: 0 20px; position: sticky; top: 0; z-index: 100; box-shadow: 0 5px 20px rgba(255,215,0,0.4); }
-        .logo { display: flex; align-items: center; gap: 10px; font-family: 'Playfair Display', serif; font-size: 1.5rem; font-weight: 900; color: var(--secondary); text-shadow: 0 0 10px rgba(255,215,0,0.8); }
-        .logo-img { width: 45px; height: 45px; border-radius: 50%; border: 2px solid var(--secondary); object-fit: cover; box-shadow: 0 0 15px rgba(255,215,0,1); background: #000; }
-        .profile-badge { background: linear-gradient(45deg, rgba(218,165,32,0.2), rgba(255,215,0,0.1)); border: 1px solid var(--secondary); color: var(--secondary); padding: 8px 15px; border-radius: 10px; font-size: 12px; font-weight: bold; text-align: right; box-shadow: 0 0 10px rgba(255,215,0,0.3); }
-        #auth-wrapper, .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; display: flex; justify-content: center; align-items: center; z-index: 999; backdrop-filter: blur(8px); background: rgba(0,0,0,0.9); }
-        .auth-box, .modal-box { background: var(--panel-bg); border: 2px solid var(--secondary); border-radius: 15px; padding: 30px; width: 90%; max-width: 400px; position: relative; box-shadow: 0 0 40px rgba(255,215,0,0.5); text-align: center; }
-        #main-dashboard { display: none; grid-template-columns: 1fr; gap: 20px; padding: 20px; max-width: 800px; margin: 0 auto; }
-        .panel { background: rgba(10, 5, 0, 0.7); border: 2px solid var(--secondary); border-radius: 15px; padding: 25px; box-shadow: inset 0 0 30px rgba(255,215,0,0.15), 0 0 15px rgba(255,215,0,0.2); }
-        .panel-title { font-family: 'Playfair Display', serif; font-size: 1.8rem; font-weight: 900; color: var(--secondary); margin-bottom: 20px; text-align: center; border-bottom: 2px dashed var(--secondary); padding-bottom: 10px; text-transform: uppercase; text-shadow: 0 0 10px rgba(255,215,0,0.5); }
-        .cate-title { font-family: 'Playfair Display', serif; font-size: 1.1rem; font-weight: 800; color: var(--accent); margin: 20px 0 10px 0; text-transform: uppercase; display: flex; align-items: center; gap: 10px; border-left: 4px solid var(--secondary); padding-left: 10px; }
-        .cyber-btn { padding: 12px; border: 2px solid var(--secondary); border-radius: 8px; cursor: pointer; font-family: 'Nunito', sans-serif; font-size: 14px; font-weight: 900; color: #000; width: 100%; margin-bottom: 10px; background: linear-gradient(180deg, #FFDF00 0%, #DAA520 100%); box-shadow: 0 0 15px rgba(255,215,0,0.4); transition: all 0.3s; display: flex; align-items: center; justify-content: center; gap: 10px; text-transform: uppercase; }
-        .cyber-btn:hover { box-shadow: 0 0 25px rgba(255,255,0,0.8); transform: scale(1.02); }
-        .btn-red { background: transparent; color: var(--secondary); border-color: var(--secondary); box-shadow: none; }
-        .btn-red:hover { background: rgba(255,215,0,0.2); color: var(--secondary); }
-        .game-banner-btn { width: 100%; height: 100px; border-radius: 12px; border: 2px solid var(--secondary); object-fit: cover; cursor: pointer; margin-bottom: 15px; box-shadow: 0 0 15px rgba(255,215,0,0.3); transition: all 0.3s; display: block; }
-        .game-banner-btn:hover { transform: scale(1.03); box-shadow: 0 0 30px rgba(255,215,0,0.8); border-color: #fff; }
-        .input-box { width: 100%; background: rgba(0,0,0,0.8); border: 2px solid var(--secondary); border-radius: 8px; color: var(--secondary); font-family: 'Nunito', sans-serif; font-size: 1.1rem; font-weight: bold; padding: 15px; text-align: center; margin-bottom: 20px; outline: none; transition: all 0.3s; letter-spacing: 2px; }
-        .input-box:focus { box-shadow: 0 0 20px rgba(255,215,0,0.8); background: #000; }
-        #game-overlay { display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: 2000; background: #000; }
+        body { font-family: 'Nunito', sans-serif; background: #000; color: #fff; overflow-x: hidden; min-height: 100vh; }
+        
+        .glass { background: var(--panel); border: 1px solid rgba(255,215,0,0.3); border-radius: 8px; box-shadow: 0 0 15px rgba(0,0,0,0.9); backdrop-filter: blur(5px);}
+        .radar-bar { width: 100%; background: #111; color: var(--gold); font-size: 10px; font-weight: bold; padding: 3px 0; border-bottom: 1px solid var(--red); display: flex; align-items: center;}
+        
+        header { height: 50px; display: flex; justify-content: space-between; align-items: center; padding: 0 15px; background: #000; border-bottom: 2px solid var(--gold); }
+        .logo { font-family: 'Playfair Display', serif; font-size: 1.2rem; color: var(--gold); display: flex; align-items: center; gap: 8px; }
+        
+        .nav-tabs { display: flex; justify-content: space-around; background: #111; border-bottom: 1px solid var(--gold); padding: 10px 0;}
+        .nav-item { font-size: 11px; font-weight: bold; color: #aaa; cursor: pointer; text-transform: uppercase;}
+        .nav-item.active { color: var(--gold); text-shadow: 0 0 5px var(--gold); border-bottom: 2px solid var(--gold); padding-bottom: 5px;}
+
+        .view-section { display: none; padding: 15px; max-width: 500px; margin: 0 auto; animation: fadeIn 0.3s;}
+        .view-section.active { display: block; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+        #auth-wrapper { position: fixed; inset: 0; display: flex; justify-content: center; align-items: center; z-index: 999; background: rgba(0,0,0,0.95); }
+        .auth-box { padding: 25px 20px; width: 90%; max-width: 320px; text-align: center; }
+        #register-form { display: none; }
+
+        .cate-title { font-size: 1rem; color: var(--gold); margin: 10px 0; text-transform: uppercase; border-left: 3px solid var(--red); padding-left: 8px; font-family: 'Playfair Display';}
+        
+        .btn { padding: 12px; border: 1px solid var(--gold); border-radius: 6px; cursor: pointer; font-family: 'Nunito'; font-size: 12px; font-weight: 900; color: #000; width: 100%; margin-bottom: 10px; background: linear-gradient(90deg, #FFD700, #DAA520); text-transform: uppercase; }
+        .btn-dark { background: #111; color: var(--gold); }
+        .btn-red { background: var(--red); border-color: var(--red); color: #fff; }
+        .btn-link { background: none; border: none; color: var(--cyan); text-decoration: underline; font-size: 11px; cursor: pointer; box-shadow: none; margin-top: 5px;}
+        
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+        .input-box { width: 100%; background: #000; border: 1px solid var(--gold); border-radius: 6px; color: var(--gold); padding: 10px; text-align: center; margin-bottom: 15px; font-weight: bold; }
+
+        #game-overlay { display: none; position: fixed; inset: 0; z-index: 2000; background: #000; }
         #game-frame { width: 100%; height: 100%; border: none; }
-        .close-game-btn { position: absolute; top: 15px; left: 15px; background: rgba(0,0,0,0.8); color: var(--secondary); border: 2px solid var(--secondary); padding: 10px 20px; border-radius: 8px; font-weight: 900; z-index: 2001; font-family: 'Nunito', sans-serif; box-shadow: 0 0 10px rgba(255,215,0,0.5); }
-        #draggable-robot { position: absolute; top: 50%; left: 5%; z-index: 2005; display: flex; flex-direction: row; align-items: center; transition: transform 0.2s ease; transform-origin: left center; }
-        .robo-img { width: 110px; height: 110px; object-fit: cover; border-radius: 50%; border: 3px solid var(--robot-glow); filter: drop-shadow(0 0 25px rgba(0,242,254,0.9)); cursor: grab; z-index: 2; position: relative; margin-right: -25px; background: #000; }
-        .robo-dialog { background: rgba(0,0,0,0.95); border: 2px solid var(--secondary); padding: 15px 15px 15px 35px; border-radius: 20px; text-align: center; box-shadow: 0 0 30px rgba(255,215,0,0.5); width: 180px; position: relative; z-index: 1; }
-        .close-btn { position: absolute; top: 10px; right: 20px; font-size: 30px; font-weight: bold; color: var(--secondary); cursor: pointer; text-shadow: 0 0 10px rgba(255,215,0,0.8); }
-        .list-item { background: rgba(0,0,0,0.8); padding: 15px; border-radius: 8px; border: 1px solid var(--secondary); margin-bottom: 10px; font-size: 14px; font-weight: bold; display: flex; justify-content: space-between; align-items: center; color: var(--text-main); }
-        .stats-box { border-top: 1px dashed var(--secondary); margin-top: 10px; padding-top: 10px; font-size: 12px; font-weight: 900; display: flex; justify-content: space-around; }
-        .btn-sz { flex: 1; border: 1px solid var(--secondary); background: transparent; color: var(--secondary); border-radius: 5px; font-size: 12px; padding: 6px; margin: 0 3px; cursor: pointer; font-weight: bold; }
-        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+        .close-game-btn { position: absolute; top: 35px; left: 10px; background: rgba(0,0,0,0.8); color: var(--red); border: 2px solid var(--red); padding: 5px 10px; border-radius: 6px; font-weight: 900; z-index: 2001; cursor:pointer; font-size: 12px;}
+        
+        #left-history-panel { position: absolute; top: 75px; left: 10px; width: 130px; background: rgba(5,5,10,0.85); border: 1px solid var(--gold); border-radius: 8px; padding: 8px; z-index: 2001; font-size: 9px; pointer-events: none; }
+        .hist-title { color: var(--gold); font-weight: 900; text-align: center; border-bottom: 1px dashed var(--gold); margin-bottom: 5px;}
+        .hist-row { display: flex; justify-content: space-between; margin-bottom: 3px; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 2px;}
+        .hist-win { color: #00ffcc; font-weight: bold;} .hist-lose { color: var(--red); font-weight: bold;}
+
+        #vip-chat-panel { position: absolute; top: 75px; right: 10px; width: 140px; background: rgba(5,5,10,0.85); border: 1px solid var(--cyan); border-radius: 8px; padding: 8px; z-index: 2001; display: flex; flex-direction: column; }
+        .chat-title { color: var(--cyan); font-weight: 900; text-align: center; border-bottom: 1px solid var(--cyan); font-size: 10px;}
+        .chat-messages { flex: 1; overflow-y: hidden; font-size: 9px; color: #ccc; margin-top: 5px; min-height: 80px;}
+        .chat-msg { margin-bottom: 4px; line-height: 1.2;}
+        .user-boss { color: var(--gold); font-weight: bold; } .user-mem { color: var(--cyan); font-weight: bold; }
+
+        #draggable-robot { position: absolute; top: 25%; left: 50%; transform: translateX(-50%); z-index: 2005; width: 240px; }
+        .robo-dialog { padding: 10px; width: 100%; position: relative; z-index: 1; border: 2px solid var(--gold); border-radius: 10px; background: rgba(10,5,15,0.95); display: flex; flex-direction: column; align-items: center; }
+        
+        .header-phien { font-size: 12px; font-weight: 900; color: #fff; margin-bottom: 5px; letter-spacing: 1px;}
+        .battle-board { display: flex; justify-content: space-between; align-items: center; width: 100%; padding: 0; }
+        .side-box { width: 50px; height: 60px; border-radius: 8px; border: 1px solid #333; display: flex; flex-direction: column; justify-content: center; align-items: center; font-family: 'Playfair Display'; font-size: 16px; font-weight: 900; color: #555; background: rgba(0,0,0,0.8); opacity: 0.5; transition: 0.2s;}
+        .side-tai.active { opacity: 1; color: var(--red); border-color: var(--red); background: rgba(255,42,42,0.2); box-shadow: 0 0 15px rgba(255,42,42,0.8); text-shadow: 0 0 5px var(--red); transform: scale(1.05); }
+        .side-xiu.active { opacity: 1; color: var(--cyan); border-color: var(--cyan); background: rgba(0,255,255,0.2); box-shadow: 0 0 15px rgba(0,255,255,0.8); text-shadow: 0 0 5px var(--cyan); transform: scale(1.05); }
+
+        .center-hub { display: flex; flex-direction: column; align-items: center; justify-content: center; position: relative; width: 80px; }
+        .robo-img { width: 55px; height: 55px; border-radius: 50%; border: 2px solid var(--gold); box-shadow: 0 0 10px var(--gold); background: #000; z-index: 5;}
+        .countdown-ring { margin-top: 5px; font-size: 14px; font-family: 'Share Tech Mono', monospace; font-weight: 900; color: #00ffcc; text-shadow: 0 0 5px #00ffcc; background: rgba(0,255,204,0.1); border: 1px solid #00ffcc; padding: 2px 10px; border-radius: 10px; display: none;}
+        .md5-cracker { font-family: 'Share Tech Mono', monospace; font-size: 9px; color: var(--matrix); text-align: center; margin-top: 5px; height: 12px; overflow: hidden; display: none; text-shadow: 0 0 5px var(--matrix);}
+        .advice-text { color: var(--gold); font-size: 10px; font-weight: 900; text-transform: uppercase; margin-top: 5px; width: 100%; text-align: center;}
+        
+        .kpi-inline { display: flex; justify-content: space-between; width: 100%; font-size: 9px; font-weight: bold; color: #aaa; margin-top: 5px; border-top: 1px dashed #444; padding-top: 5px;}
+        .kpi-win { color: #00ffcc; } .kpi-lose { color: var(--red); }
+        .setup-kpi-panel { background: rgba(0,0,0,0.8); padding: 10px; border-radius: 8px; border: 1px solid var(--gold); margin-bottom: 15px; }
+        .kpi-input { width: 40px; background: #111; border: 1px solid var(--gold); color: #fff; padding: 2px; text-align: center; font-weight: bold; border-radius: 4px; font-size:10px;}
+
+        #victory-screen { display:none; position:absolute; inset:0; background:rgba(0,0,0,0.95); z-index: 50; border-radius: 10px; flex-direction:column; justify-content:center; align-items:center; }
+        .victory-text { color: var(--gold); font-family: 'Playfair Display'; font-size: 16px; font-weight: 900; text-align: center; }
+        .voice-toggle { position: absolute; top: 35px; right: 10px; color: var(--gold); font-size: 16px; cursor: pointer; z-index: 2001;}
+
+        .price-box { border: 1px solid var(--gold); padding: 10px; border-radius: 8px; margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center; background: rgba(0,0,0,0.5);}
+        .price-title { font-weight: 900; color: var(--gold); font-size: 14px;}
+        .price-amt { color: var(--cyan); font-weight: bold;}
     </style>
 </head>
 <body>
 
     <div id="game-overlay">
-        <button class="close-game-btn" onclick="closeGame()"><i class="fas fa-times"></i> THOÁT</button>
+        <div class="radar-bar"><marquee scrollamount="4">🚨 RADA HỆ THỐNG: BETVIP (BỆT 4 TÀI) - LC79 MD5 (CẦU 1-1) - CHỜ TÍN HIỆU...</marquee></div>
+        <button class="close-game-btn" onclick="closeGame()"><i class="fas fa-times"></i> ĐÓNG</button>
+        <i class="fas fa-volume-up voice-toggle" id="btn-voice" onclick="toggleVoice()"></i>
+        
+        <div id="left-history-panel"><div class="hist-title">LỊCH SỬ AI V19</div><div id="left-history-content"></div></div>
+        
+        <div id="vip-chat-panel">
+            <div class="chat-title"><i class="fas fa-users"></i> VIP LOUNGE</div>
+            <div class="chat-messages" id="chat-box"><div class="chat-msg"><span class="user-boss">[CHỦ TỊCH] Hưng:</span> Anh em chú ý!</div></div>
+        </div>
+
         <iframe id="game-frame" src=""></iframe>
+        
         <div id="draggable-robot">
-            <img class="robo-img" src="https://i.postimg.cc/wMdhjZFJ/1773446152525.png">
-            <div class="robo-dialog">
-                <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--secondary); margin-bottom: 10px; padding-bottom: 5px;">
-                    <span id="robo-mode-title" style="font-size: 14px; font-weight: 900; color: var(--robot-glow); text-shadow: 0 0 8px var(--robot-glow);">AI MAX XỊN</span>
-                </div>
-                
-                <div id="robo-view-auto">
-                    <div style="font-size: 12px; font-weight: 800; color: #fff;" id="robo-subtitle">PHIÊN: <span id="robo-phien" style="color: var(--secondary);">...</span></div>
-                    <div id="robo-kq" style="font-size: 24px; font-family: 'Playfair Display', serif; font-weight: 900; padding: 5px 0; color: #fff; text-shadow: 0 0 10px rgba(255,255,255,0.5);">SCANNING</div>
-                    <div id="robo-tyle" style="color: var(--secondary); font-size: 13px; font-weight: 900; text-shadow: 0 0 8px var(--secondary);">Đang tải dữ liệu...</div>
-                    <div class="stats-box" id="robo-thongke" style="display:none;">
-                        <div style="color: #ff3333; text-shadow: 0 0 5px #ff3333;"><span id="tk-tai-label">TÀI</span>: <span id="tk-tai">0</span></div>
-                        <div style="color: #ffffff; text-shadow: 0 0 5px #ffffff;"><span id="tk-xiu-label">XỈU</span>: <span id="tk-xiu">0</span></div>
+            <div class="robo-dialog glass">
+                <div id="victory-screen"><div class="victory-text"><i class="fas fa-trophy"></i><br>ĐẠT KPI</div></div>
+                <div class="header-phien">PHIÊN: <span id="robo-phien" style="color:var(--gold);">...</span></div>
+                <div class="battle-board">
+                    <div class="side-box side-tai" id="box-tai">TÀI</div>
+                    <div class="center-hub">
+                        <img class="robo-img" src="https://i.postimg.cc/wMdhjZFJ/1773446152525.png">
+                        <div class="countdown-ring" id="timer-15s">15s</div>
                     </div>
+                    <div class="side-box side-xiu" id="box-xiu">XỈU</div>
+                </div>
+                <div class="md5-cracker" id="md5-screen">Decrypting Hash...</div>
+                <div class="advice-text" id="robo-advice"><i class="fas fa-sync fa-spin"></i> KẾT NỐI V19...</div>
+                <div class="kpi-inline">
+                    <span>W: <span class="kpi-win" id="live-win">0</span>/<span id="target-win-show">5</span></span>
+                    <span>L: <span class="kpi-lose" id="live-lose">0</span>/<span id="target-lose-show">3</span></span>
                 </div>
             </div>
         </div>
     </div>
 
     <div id="auth-wrapper">
-        <div class="auth-box">
-            <div class="logo" style="justify-content: center; margin-bottom: 15px; font-size: 2rem;">
-                <img class="logo-img" src="https://i.postimg.cc/wMdhjZFJ/1773446152525.png" style="width: 80px; height: 80px;">
-            </div>
-            <div class="panel-title" style="border:none; margin-bottom: 25px; font-size: 1.8rem;">KING VIP ACCESS</div>
-            <input type="text" id="auth-key" class="input-box" placeholder="NHẬP MÃ KEY CỦA VUA...">
-            <button class="cyber-btn" onclick="verifyKey()">KÍCH HOẠT QUYỀN NĂNG</button>
-            <div id="auth-msg" style="margin-top: 15px; font-weight:bold; color: var(--secondary);"></div>
-            <div style="margin-top: 15px; font-size: 12px; color: var(--border-color);">Độc Quyền Khai Thác Bởi Hưng Admin</div>
-        </div>
-    </div>
-
-    <header id="main-header" style="display:none;">
-        <div class="logo"><img class="logo-img" src="https://i.postimg.cc/wMdhjZFJ/1773446152525.png" style="width: 35px; height: 35px;"> HƯNG ADMIN</div>
-        <div class="profile-badge">
-            <div style="color: #fff;">TRẠNG THÁI: <span style="color: #00ff00;">ĐÃ KÍCH HOẠT</span></div>
-            <div>HSD: <span id="header-expire" style="color: var(--secondary);">...</span></div>
-        </div>
-    </header>
-
-    <div id="main-dashboard">
-        <div class="panel">
-            <div class="panel-title" style="font-size: 1.8rem;"><i class="fas fa-chess-king"></i> KHO VŨ KHÍ 8 CỔNG</div>
+        <div class="auth-box glass" id="login-form">
+            <div class="logo" style="justify-content:center; margin-bottom:10px; font-size:2rem;"><img class="logo-img" src="https://i.postimg.cc/wMdhjZFJ/1773446152525.png" style="width:50px; height:50px;"></div>
+            <div style="font-family:'Playfair Display'; font-size:1.5rem; color:var(--gold); font-weight:900;">HUNGCUTO V19</div>
+            <div style="font-size: 9px; color: #888; margin-bottom: 20px; letter-spacing: 2px;">ENTERPRISE PLATFORM</div>
             
-            <img src="https://i.postimg.cc/3JzvBWP6/Screenshot-2026-03-14-10-32-55-76-40deb401b9ffe8e1df2f1cc5ba480b12.jpg" 
-                 class="game-banner-btn" onclick="openTool('betvip_tx', 'BETVIP - TÀI XỈU', 'https://play.betvip.fit/')">
-            <img src="https://i.postimg.cc/vH4nf52J/Screenshot-2026-03-14-10-33-38-24-40deb401b9ffe8e1df2f1cc5ba480b12.jpg" 
-                 class="game-banner-btn" onclick="openTool('lc79_tx', 'LC79 - TÀI XỈU', 'https://lc79.bet')">
+            <input type="text" id="login-user" class="input-box" placeholder="Tên Đăng Nhập (4-16 ký tự)">
+            <input type="password" id="login-pass" class="input-box" placeholder="Mật Khẩu (4-16 ký tự)">
+            <button class="btn" onclick="login()"><i class="fas fa-sign-in-alt"></i> ĐĂNG NHẬP</button>
+            <button class="btn-link" onclick="toggleAuth()">Chưa có tài khoản? Đăng ký ngay!</button>
+            <div id="login-msg" style="margin-top:5px; color:var(--red); font-size:11px; font-weight:bold;"></div>
+        </div>
 
-            <div class="cate-title">🎰 SUNWIN & XOCDIA88</div>
-            <div class="grid-2">
-                <button class="cyber-btn" onclick="openTool('sunwin_tx', 'SUNWIN TX', 'https://web.sunwin.club/')">SUNWIN TX</button>
-                <button class="cyber-btn" onclick="openTool('xocdia88_md5', 'XOCDIA88 MD5', '')">XOCDIA88 MD5</button>
+        <div class="auth-box glass" id="register-form">
+            <div style="font-family:'Playfair Display'; font-size:1.3rem; color:var(--gold); font-weight:900; margin-bottom:15px;">ĐĂNG KÝ TÀI KHOẢN</div>
+            <input type="text" id="reg-user" class="input-box" placeholder="Tên Đăng Nhập (4-16 ký tự)">
+            <input type="password" id="reg-pass" class="input-box" placeholder="Mật Khẩu (4-16 ký tự)">
+            <input type="email" id="reg-email" class="input-box" placeholder="Địa chỉ Gmail hợp lệ">
+            <button class="btn" style="border-color:var(--cyan); background:linear-gradient(90deg, #00ffff, #0088ff); color:#fff;" onclick="register()"><i class="fas fa-user-plus"></i> ĐĂNG KÝ</button>
+            <button class="btn-link" onclick="toggleAuth()">Đã có tài khoản? Đăng nhập.</button>
+            <div id="reg-msg" style="margin-top:5px; color:var(--red); font-size:11px; font-weight:bold;"></div>
+        </div>
+    </div>
+        <div id="main-app" style="display:none;">
+        <header>
+            <div class="logo"><img class="logo-img" src="https://i.postimg.cc/wMdhjZFJ/1773446152525.png"> V19 SÀN AI</div>
+            <div style="color:var(--red); cursor:pointer; font-weight:bold; font-size:12px;" onclick="logout()"><i class="fas fa-power-off"></i> THOÁT</div>
+        </header>
+
+        <div class="nav-tabs">
+            <div class="nav-item active" onclick="switchView('view-tool', this)">Công Cụ AI</div>
+            <div class="nav-item" onclick="switchView('view-profile', this)">Hồ Sơ & Nạp</div>
+            <div class="nav-item" onclick="switchView('view-store', this)">Mua Key</div>
+            <div class="nav-item" id="tab-admin" style="display:none; color:var(--red);" onclick="switchView('view-admin', this)">ADMIN</div>
+        </div>
+
+        <div id="view-tool" class="view-section active">
+            <div class="glass" style="padding: 15px; margin-bottom: 15px; text-align:center;">
+                <input type="text" id="active-key-input" class="input-box" placeholder="Nhập Key Đã Mua Để Mở Khóa AI" style="margin-bottom:10px;">
             </div>
 
-            <div class="cate-title">🎲 HITCLUB & BETVIP MD5</div>
-            <div class="grid-2">
-                <button class="cyber-btn" onclick="openTool('hitclub_md5', 'HITCLUB MD5', '')">HITCLUB MD5</button>
-                <button class="cyber-btn" onclick="openTool('betvip_md5', 'BETVIP MD5', 'https://play.betvip.fit/')">BETVIP MD5</button>
+            <div class="setup-kpi-panel">
+                <div class="cate-title" style="margin-top:0; font-size:12px;"><i class="fas fa-bullseye"></i> CHỐT LỜI / LỖ (VÁN)</div>
+                <div style="display:flex; justify-content:space-between; font-size:10px; color:#aaa;">
+                    <div>THẮNG: <input type="number" id="setup-win" class="kpi-input" value="5"></div>
+                    <div>THUA: <input type="number" id="setup-lose" class="kpi-input" value="3"></div>
+                </div>
             </div>
 
-            <div class="cate-title">🔥 LC79 NÂNG CAO</div>
-            <div class="grid-2">
-                <button class="cyber-btn" onclick="openTool('lc79_md5', 'LC79 MD5', 'https://lc79.bet')">LC79 MD5</button>
-                <button class="cyber-btn btn-red" onclick="openTool('lc79_xd', 'LC79 XÓC ĐĨA', 'https://lc79.bet')"><i class="fas fa-dot-circle"></i> XÓC ĐĨA LC79</button>
+            <div class="glass" style="padding: 10px; margin-bottom: 12px;">
+                <div class="cate-title" style="font-size:12px;">CỔNG BETVIP</div>
+                <div class="grid-2">
+                    <button class="btn" onclick="startAiTool('betvip_tx', 'BETVIP TÀI XỈU', 'https://play.betvip.fit/')">TÀI XỈU HŨ</button>
+                    <button class="btn btn-dark" onclick="startAiTool('betvip_md5', 'BETVIP MD5', 'https://play.betvip.fit/')">TÀI XỈU MD5</button>
+                </div>
             </div>
             
-            <button class="cyber-btn" id="btn-admin-panel" style="display:none; margin-top: 30px; background: transparent; border-color: var(--robot-glow); color: var(--robot-glow);" onclick="loadAdminData()">⚙️ QUẢN TRỊ VƯƠNG QUỐC (TẠO KEY)</button>
-            <button class="cyber-btn btn-red" style="margin-top: 10px;" onclick="logout()">ĐĂNG XUẤT KEY</button>
-        </div>
-    </div>
-
-    <div id="admin-modal" class="modal-overlay" style="display:none;">
-        <div class="modal-box" style="max-width: 500px;">
-            <div class="close-btn" onclick="this.parentElement.parentElement.style.display='none'">×</div>
-            <div class="panel-title" style="color:var(--secondary);">XƯỞNG ĐÚC KEY VÀNG</div>
-            <div style="background: rgba(0,0,0,0.8); padding: 15px; border-radius: 8px; margin-bottom: 20px; border: 1px solid var(--secondary);">
-                <input type="text" id="custom-key-input" class="input-box" placeholder="Nhập tên Key (Để trống = Tự random)" style="margin-bottom: 15px; font-size: 13px;">
-                <select id="key-duration" class="input-box" style="margin-bottom: 10px;">
-                    <option value="1H">Gói 1 Giờ</option>
-                    <option value="1D">Gói 1 Ngày</option>
-                    <option value="3D">Gói 3 Ngày</option>
-                    <option value="30D">Gói 1 Tháng</option>
-                </select>
-                <button class="cyber-btn" onclick="adminCreateKey()"><i class="fas fa-hammer"></i> RÈN KEY MỚI</button>
+            <div class="glass" style="padding: 10px;">
+                <div class="cate-title" style="font-size:12px;">CỔNG LC79.BET</div>
+                <div class="grid-2" style="margin-bottom: 8px;">
+                    <button class="btn" onclick="startAiTool('lc79_tx', 'LC79 TÀI XỈU', 'https://lc79.bet')">TÀI XỈU HŨ</button>
+                    <button class="btn btn-dark" onclick="startAiTool('lc79_md5', 'LC79 MD5', 'https://lc79.bet')">TÀI XỈU MD5</button>
+                </div>
+                <button class="btn btn-red" onclick="startAiTool('lc79_xd', 'LC79 XÓC ĐĨA', 'https://lc79.bet')">XÓC ĐĨA CHẴN LẺ</button>
             </div>
-            <h3 style="margin: 15px 0; color: var(--secondary); text-align: left; font-family: 'Playfair Display';">KHO KEY ĐÃ CẤP</h3>
-            <div id="admin-keys" style="max-height: 250px; overflow-y: auto; text-align: left;"></div>
         </div>
-    </div>
-        <script>
-        let currentKey = localStorage.getItem("royal_key") || ""; 
+
+        <div id="view-profile" class="view-section">
+            <div class="glass" style="padding: 15px; text-align:center;">
+                <div style="font-size:40px; color:var(--gold); margin-bottom:10px;"><i class="fas fa-user-circle"></i></div>
+                <h2 style="color:var(--cyan); text-transform:uppercase;" id="prof-user">USER</h2>
+                <div style="font-size:12px; color:#aaa; margin-bottom:15px;" id="prof-email">email@gmail.com</div>
+                <div style="font-size:14px; font-weight:bold;">SỐ DƯ HIỆN TẠI</div>
+                <div style="font-size:30px; color:var(--gold); font-weight:900; margin-bottom:20px;"><span id="prof-bal">0</span> VNĐ</div>
+                
+                <div style="border-top:1px dashed var(--gold); padding-top:15px; text-align:left;">
+                    <h3 style="color:var(--red); font-size:14px; margin-bottom:10px;"><i class="fas fa-wallet"></i> HƯỚNG DẪN NẠP TIỀN</h3>
+                    <p style="font-size:11px; color:#ccc; line-height:1.6;">
+                        1. Chuyển khoản tới MoMo: <b style="color:#fff;">0987654321</b> (Chủ TK: Nguyen Tuan Hung)<br>
+                        2. Nội dung chuyển khoản BẮT BUỘC: <b style="color:var(--cyan);" id="prof-transfer-code">NAP USERNAME</b><br>
+                        3. Đợi Admin cộng tiền trong 1-3 phút.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div id="view-store" class="view-section">
+            <div class="glass" style="padding: 15px;">
+                <div class="cate-title" style="margin-top:0;">BẢNG GIÁ KEY VIP</div>
+                
+                <div class="price-box">
+                    <div><div class="price-title">Gói 1 Giờ (TEST)</div><div class="price-amt">10,000 VNĐ</div></div>
+                    <button class="btn" style="width:80px; margin:0; padding:8px;" onclick="buyKey('1H')">MUA</button>
+                </div>
+                <div class="price-box">
+                    <div><div class="price-title">Gói 1 Ngày</div><div class="price-amt">50,000 VNĐ</div></div>
+                    <button class="btn" style="width:80px; margin:0; padding:8px;" onclick="buyKey('1D')">MUA</button>
+                </div>
+                <div class="price-box">
+                    <div><div class="price-title">Gói 3 Ngày</div><div class="price-amt">100,000 VNĐ</div></div>
+                    <button class="btn" style="width:80px; margin:0; padding:8px;" onclick="buyKey('3D')">MUA</button>
+                </div>
+                <div class="price-box">
+                    <div><div class="price-title">Gói 1 Tháng (VIP)</div><div class="price-amt">500,000 VNĐ</div></div>
+                    <button class="btn" style="width:80px; margin:0; padding:8px; background:var(--red); color:#fff; border:none;" onclick="buyKey('30D')">MUA</button>
+                </div>
+            </div>
+            
+            <div id="new-key-result" class="glass" style="display:none; margin-top:15px; padding:15px; text-align:center; border-color:#00ffcc;">
+                <div style="color:#00ffcc; font-weight:bold; margin-bottom:5px;">MUA THÀNH CÔNG! MÃ KEY CỦA BẠN LÀ:</div>
+                <div id="new-key-text" style="font-size:18px; color:#fff; background:#000; padding:10px; border-radius:5px; font-family:'Share Tech Mono'; letter-spacing:2px; margin-bottom:10px;"></div>
+                <button class="btn" style="padding:8px;" onclick="copyMyKey()">SAO CHÉP & DÙNG NGAY</button>
+            </div>
+        </div>
+
+        <div id="view-admin" class="view-section">
+            <div class="glass" style="padding: 15px; margin-bottom:15px;">
+                <div class="cate-title" style="margin-top:0; color:var(--red); border-color:var(--gold);">QUẢN LÝ KHÁCH HÀNG (CỘNG TIỀN)</div>
+                <div style="display:flex; gap:5px; margin-bottom:10px;">
+                    <input type="text" id="ad-target-user" class="input-box" style="margin:0;" placeholder="Tên User">
+                    <input type="number" id="ad-money-amt" class="input-box" style="margin:0;" placeholder="Số Tiền (VNĐ)">
+                </div>
+                <div class="grid-2">
+                    <button class="btn" style="margin:0;" onclick="adminActionUser('add_money')">CỘNG TIỀN</button>
+                    <button class="btn btn-red" style="margin:0;" onclick="adminActionUser('change_pwd')">ĐỔI MẬT KHẨU</button>
+                    <button class="btn btn-dark" style="margin:0; border-color:var(--red); color:var(--red);" onclick="adminActionUser('ban')">KHÓA ACC</button>
+                    <button class="btn btn-dark" style="margin:0; border-color:var(--cyan); color:var(--cyan);" onclick="adminActionUser('unban')">MỞ KHÓA</button>
+                </div>
+                <div id="admin-user-list" style="margin-top:15px; max-height:150px; overflow-y:auto; font-size:10px; border-top:1px solid #333; padding-top:10px;"></div>
+            </div>
+
+            <div class="glass" style="padding: 15px;">
+                <div class="cate-title" style="margin-top:0; color:var(--cyan); border-color:var(--gold);">QUẢN LÝ TẤT CẢ KEY</div>
+                <div id="admin-keys" style="max-height:200px; overflow-y:auto;"></div>
+            </div>
+        </div>
+        </div>
+            <script>
+        let currentUser = localStorage.getItem("v19_user") || ""; 
+        let currentPass = localStorage.getItem("v19_pass") || ""; 
+        let currentRole = ""; let userBalance = 0; let currentKey = "";
+        
         let scanInterval; let phienCu = ""; let activeGame = ""; 
-        let isSpamming = false; let isPredicting = false; 
+        let isPredicting = false; let countdownTimer; let md5Interval;
+        let targetWin = 5, targetLose = 3, currentWin = 0, currentLose = 0, isLockKpi = false;
+        let isVoiceOn = true;
 
-        if(currentKey) { 
-            document.getElementById('auth-key').value = currentKey;
-            verifyKey(true); 
+        function speak(text) {
+            if(!isVoiceOn) return;
+            let msg = new SpeechSynthesisUtterance(text); msg.lang = 'vi-VN'; msg.rate = 1.1; window.speechSynthesis.speak(msg);
         }
 
-        async function verifyKey(isAuto = false) {
-            if (isSpamming) return;
-            isSpamming = true; setTimeout(() => { isSpamming = false; }, 2000);
-            let k = document.getElementById('auth-key').value.trim();
-            if(!k) { document.getElementById('auth-msg').innerText = "Vui lòng dâng lên Mã Key!"; return; }
-            if(!isAuto) { document.getElementById('auth-msg').innerText = "Đang kiểm chứng Hoàng Gia..."; document.getElementById('auth-msg').style.color = "orange"; }
+        function toggleVoice() {
+            isVoiceOn = !isVoiceOn; document.getElementById('btn-voice').className = isVoiceOn ? "fas fa-volume-up voice-toggle" : "fas fa-volume-mute voice-toggle";
+        }
+
+        function toggleAuth() {
+            let log = document.getElementById('login-form'); let reg = document.getElementById('register-form');
+            if(log.style.display === 'none') { log.style.display = 'block'; reg.style.display = 'none'; } 
+            else { log.style.display = 'none'; reg.style.display = 'block'; }
+        }
+
+        function switchView(viewId, el) {
+            document.querySelectorAll('.view-section').forEach(v => v.classList.remove('active'));
+            document.getElementById(viewId).classList.add('active');
+            document.querySelectorAll('.nav-item').forEach(i => i.classList.remove('active'));
+            el.classList.add('active');
+            if(viewId === 'view-admin') { loadAdminUsers(); loadAdminKeys(); }
+        }
+
+        if(currentUser && currentPass) { 
+            document.getElementById('login-user').value = currentUser; document.getElementById('login-pass').value = currentPass;
+            login(true); 
+        }
+
+        async function register() {
+            let u = document.getElementById('reg-user').value.trim();
+            let p = document.getElementById('reg-pass').value.trim();
+            let e = document.getElementById('reg-email').value.trim();
+            let msg = document.getElementById('reg-msg');
+            
+            if(u.length < 4 || u.length > 16 || p.length < 4 || p.length > 16) return msg.innerText = "Tên và Pass phải từ 4-16 ký tự!";
+            if(!e.includes("@gmail.com")) return msg.innerText = "Phải dùng @gmail.com hợp lệ!";
+            
+            msg.innerText = "Đang xử lý...";
+            try {
+                let res = await fetch('/api/user/register', { method: 'POST', headers: {'Content-Type':'application/json'}, body: JSON.stringify({username: u, password: p, email: e})});
+                let json = await res.json();
+                if(json.status === "success") {
+                    alert(json.msg); toggleAuth();
+                    document.getElementById('login-user').value = u; document.getElementById('login-pass').value = p;
+                } else msg.innerText = json.msg;
+            } catch(err) { msg.innerText = "Lỗi máy chủ!"; }
+        }
+
+        async function login(isAuto = false) {
+            let u = document.getElementById('login-user').value.trim(); let p = document.getElementById('login-pass').value.trim();
+            let msg = document.getElementById('login-msg');
+            if(!u || !p) return msg.innerText = "Nhập đủ thông tin!";
+            if(!isAuto) msg.innerText = "Đang đăng nhập...";
             
             try {
-                let res = await fetch('/api/verify_key', { method: 'POST', headers: {'Content-Type':'application/json'}, body: JSON.stringify({key: k})});
+                let res = await fetch('/api/user/login', { method: 'POST', headers: {'Content-Type':'application/json'}, body: JSON.stringify({username: u, password: p})});
                 let json = await res.json();
                 if (json.status === "success") {
-                    currentKey = k; localStorage.setItem("royal_key", currentKey); 
+                    currentUser = json.username; currentPass = p; currentRole = json.role; userBalance = json.balance;
+                    localStorage.setItem("v19_user", currentUser); localStorage.setItem("v19_pass", currentPass);
+                    
                     document.getElementById('auth-wrapper').style.display = 'none'; 
-                    document.getElementById('main-header').style.display = 'flex'; 
-                    document.getElementById('main-dashboard').style.display = 'grid';
-                    document.getElementById('header-expire').innerText = json.expire;
-                    document.getElementById('btn-admin-panel').style.display = (json.role === "admin") ? 'block' : 'none';
+                    document.getElementById('main-app').style.display = 'block'; 
+                    
+                    document.getElementById('prof-user').innerText = currentUser;
+                    document.getElementById('prof-email').innerText = json.email;
+                    document.getElementById('prof-bal').innerText = userBalance.toLocaleString();
+                    document.getElementById('prof-transfer-code').innerText = "NAP " + currentUser;
+                    
+                    if(currentRole === "admin") document.getElementById('tab-admin').style.display = 'block';
+                    if(!isAuto) speak("Đăng nhập thành công!");
                 } else { 
-                    if(!isAuto) { document.getElementById('auth-msg').innerText = json.msg; document.getElementById('auth-msg').style.color = "red"; } 
-                    else { localStorage.removeItem("royal_key"); currentKey = ""; }
+                    if(!isAuto) msg.innerText = json.msg; else { localStorage.removeItem("v19_user"); localStorage.removeItem("v19_pass"); }
                 }
-            } catch(e) {
-                if(!isAuto) { document.getElementById('auth-msg').innerText = "Mất kết nối Server Hoàng Gia!"; document.getElementById('auth-msg').style.color = "red"; }
-            }
+            } catch(err) { if(!isAuto) msg.innerText = "Mất kết nối máy chủ!"; }
         }
 
         function logout() { 
-            localStorage.removeItem("royal_key"); currentKey = ""; activeGame = ""; clearInterval(scanInterval); isPredicting = false;
-            document.getElementById('main-header').style.display = 'none'; 
-            document.getElementById('main-dashboard').style.display = 'none'; 
-            document.getElementById('auth-wrapper').style.display = 'flex'; 
-            document.getElementById('auth-key').value = "";
-            document.getElementById('auth-msg').innerText = "Đã thoái vị. Vui lòng nhập Key mới.";
-            document.getElementById('auth-msg').style.color = "var(--secondary)";
+            localStorage.removeItem("v19_user"); localStorage.removeItem("v19_pass");
+            location.reload(); 
         }
 
-        function openTool(gameTarget, titleName, url) {
-            activeGame = gameTarget; 
-            phienCu = ""; clearInterval(scanInterval); isPredicting = false;
-            document.getElementById('robo-mode-title').innerText = titleName;
-            document.getElementById('game-overlay').style.display = 'block';
-            if (url !== '') { document.getElementById('game-frame').src = url; }
+        async function buyKey(pkg) {
+            if(!confirm("Xác nhận mua gói " + pkg + "?")) return;
+            try {
+                let res = await fetch('/api/user/buy_key', { method: 'POST', headers: {'Content-Type':'application/json'}, body: JSON.stringify({username: currentUser, package: pkg})});
+                let json = await res.json();
+                if(json.status === "success") {
+                    userBalance = json.new_balance; document.getElementById('prof-bal').innerText = userBalance.toLocaleString();
+                    document.getElementById('new-key-result').style.display = 'block';
+                    document.getElementById('new-key-text').innerText = json.new_key;
+                    document.getElementById('active-key-input').value = json.new_key; 
+                    alert("Mua Key thành công! Mã đã tự động điền vào Tool.");
+                } else alert("Lỗi: " + json.msg);
+            } catch(e) { alert("Lỗi mạng!"); }
+        }
+
+        function copyMyKey() {
+            let key = document.getElementById('new-key-text').innerText;
+            navigator.clipboard.writeText(key); alert("Đã copy mã Key!");
+            switchView('view-tool', document.querySelector('.nav-item')); 
+        }
+
+        async function startAiTool(gameId, toolName, url) {
+            let k = document.getElementById('active-key-input').value.trim();
+            if(currentRole === 'admin') k = 'hungadmin11'; 
+            if(!k) return alert("Bạn phải nhập Mã Key để mở khóa AI!");
             
-            // Nếu là xóc đĩa thì đổi Text Label
-            if(gameTarget === "lc79_xd") {
-                document.getElementById('tk-tai-label').innerText = "CHẴN";
-                document.getElementById('tk-xiu-label').innerText = "LẺ";
-            } else {
-                document.getElementById('tk-tai-label').innerText = "TÀI";
-                document.getElementById('tk-xiu-label').innerText = "XỈU";
-            }
+            let res = await fetch('/api/verify_key', { method: 'POST', headers: {'Content-Type':'application/json'}, body: JSON.stringify({key: k})});
+            let json = await res.json();
+            if(json.status !== "success") return alert(json.msg);
+            
+            currentKey = k;
+            
+            targetWin = parseInt(document.getElementById('setup-win').value) || 5; targetLose = parseInt(document.getElementById('setup-lose').value) || 3;
+            document.getElementById('target-win-show').innerText = targetWin; document.getElementById('target-lose-show').innerText = targetLose;
+            currentWin = 0; currentLose = 0; isLockKpi = false; document.getElementById('live-win').innerText = "0"; document.getElementById('live-lose').innerText = "0";
+            document.getElementById('victory-screen').style.display = 'none';
 
-            document.getElementById('robo-subtitle').innerHTML = 'PHIÊN: <span id="robo-phien">...</span>';
-            document.getElementById('robo-kq').innerText = "SCANNING"; document.getElementById('robo-tyle').innerText = "Đang kết nối API..."; document.getElementById('robo-thongke').style.display = 'none';
-            getSignalTX(); scanInterval = setInterval(getSignalTX, 2000); 
+            if (url !== '') document.getElementById('game-frame').src = url;
+            activeGame = gameId; phienCu = ""; isPredicting = false; clearInterval(scanInterval); clearInterval(countdownTimer); stopMD5Cracker();
+            
+            document.getElementById('game-overlay').style.display = 'block';
+            document.getElementById('robo-phien').innerText = "ĐANG TẢI...";
+            document.getElementById('robo-advice').innerText = "KẾT NỐI API V19...";
+            document.getElementById('left-history-content').innerHTML = '<i style="color:#777;">Đang lấy dữ liệu...</i>';
+            
+            document.getElementById('box-tai').innerText = (gameId === 'lc79_xd') ? "CHẴN" : "TÀI";
+            document.getElementById('box-xiu').innerText = (gameId === 'lc79_xd') ? "LẺ" : "XỈU";
+            
+            resetBoxes(); speak("Đã kết nối dữ liệu " + toolName);
+            getSignalTX(); scanInterval = setInterval(getSignalTX, 2000);
         }
 
-        function closeGame() { activeGame = ""; document.getElementById('game-overlay').style.display = 'none'; document.getElementById('game-frame').src = ''; clearInterval(scanInterval); isPredicting = false; }
+        function startMD5Cracker() {
+            let md5El = document.getElementById('md5-screen'); md5El.style.display = 'block'; let chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%&*";
+            md5Interval = setInterval(() => { md5El.innerText = "Hash: 0x" + Array.from({length: 12}, () => chars[Math.floor(Math.random() * chars.length)]).join(''); }, 50);
+        }
+        function stopMD5Cracker() { clearInterval(md5Interval); document.getElementById('md5-screen').style.display = 'none'; }
+
+        setInterval(() => {
+            let msgs = ["Chuẩn bị bẻ cầu anh em ơi!", "Sếp phán quá chuẩn", "Húp trọn tay này", "Đu bệt thôi!", "Vào nhẹ tay thăm dò nha"];
+            let chatBox = document.getElementById('chat-box'); let newMsg = document.createElement('div'); newMsg.className = "chat-msg";
+            newMsg.innerHTML = `<span class="user-mem">VIP_Khach${Math.floor(Math.random()*90)+10}:</span> ${msgs[Math.floor(Math.random()*msgs.length)]}`;
+            chatBox.appendChild(newMsg); chatBox.scrollTop = chatBox.scrollHeight; if(chatBox.children.length > 5) chatBox.removeChild(chatBox.firstChild);
+        }, 8000);
+
+        function closeGame() { activeGame = ""; phienCu = ""; clearInterval(scanInterval); clearInterval(countdownTimer); stopMD5Cracker(); isPredicting = false; document.getElementById('game-overlay').style.display = 'none'; document.getElementById('game-frame').src = ''; }
+        function resetBoxes() { document.getElementById('box-tai').classList.remove('active'); document.getElementById('box-xiu').classList.remove('active'); }
+
+        function start15sTimer() {
+            clearInterval(countdownTimer); let timeLeft = 15; let timerEl = document.getElementById('timer-15s'); timerEl.style.display = 'block'; timerEl.innerText = timeLeft + "s";
+            countdownTimer = setInterval(() => {
+                timeLeft--; if(timeLeft >= 0) timerEl.innerText = timeLeft + "s";
+                else { clearInterval(countdownTimer); timerEl.style.display = 'none'; resetBoxes(); document.getElementById('robo-advice').innerText = "CHỜ VÁN MỚI..."; }
+            }, 1000);
+        }
 
         async function getSignalTX() {
-            if (isPredicting) return; 
+            if (isPredicting || !activeGame || isLockKpi) return; 
             try {
-                // Gọi API với đúng ID của cổng game
                 let res = await fetch(`/api/scan?tool=${activeGame}&key=${currentKey}`); let json = await res.json();
                 if(json.status === "error") { 
-                    if(json.msg.includes("Chờ cầu mới")) return; 
-                    alert(json.msg); clearInterval(scanInterval); closeGame(); 
-                    if(json.msg.includes("hết hạn") || json.msg.includes("khóa")) logout();
+                    if(json.msg.includes("đồng bộ")) return; 
+                    alert("LỖI: " + json.msg); closeGame(); 
                     return; 
                 }
+                
                 let data = json.data;
-                if(data.phien !== phienCu) {
-                    isPredicting = true;
-                    phienCu = data.phien; 
-                    document.getElementById('robo-phien').innerText = "#" + data.phien;
+                if(data.phien !== phienCu && data.phien !== "ĐANG TẢI...") {
+                    isPredicting = true; 
                     
-                    let el = document.getElementById('robo-kq');
-                    let tyleEl = document.getElementById('robo-tyle');
+                    if(phienCu !== "" && data.history && data.history.length > 0) {
+                        let latestResult = data.history[0];
+                        if(latestResult.phien == phienCu && latestResult.du_doan !== "CHỜ CẦU") {
+                            if(latestResult.status === "WIN") { currentWin++; document.getElementById('live-win').innerText = currentWin;}
+                            else { currentLose++; document.getElementById('live-lose').innerText = currentLose; }
+                            
+                            if(currentWin >= targetWin || currentLose >= targetLose) {
+                                isLockKpi = true; document.getElementById('victory-screen').style.display = 'flex'; speak("Hoàn thành mục tiêu."); return;
+                            }
+                        }
+                    }
+
+                    phienCu = data.phien; document.getElementById('robo-phien').innerText = data.phien; 
                     
-                    el.innerText = "⏳ LOADING..."; 
-                    el.style.color = "var(--secondary)";
-                    tyleEl.innerText = "Đợi bố chút... đang soi cầu " + activeGame.split("_")[0].toUpperCase() + " xịn!";
-                    document.getElementById('robo-thongke').style.display = 'none';
+                    if(data.history && data.history.length > 0) {
+                        let htmlHist = ""; let histToDisplay = data.history.slice(0, 8);
+                        histToDisplay.forEach(h => {
+                            if(h.du_doan === "CHỜ CẦU") return;
+                            let colorClass = h.status === "WIN" ? "hist-win" : "hist-lose";
+                            htmlHist += `<div class="hist-row"><span>#${h.phien.toString().slice(-4)}</span> <span>${h.du_doan}</span> <span class="${colorClass}">${h.status}</span></div>`;
+                        });
+                        document.getElementById('left-history-content').innerHTML = htmlHist;
+                    }
+
+                    resetBoxes(); document.getElementById('timer-15s').style.display = 'none'; clearInterval(countdownTimer);
+                    document.getElementById('robo-advice').innerText = "AI ĐANG TÍNH TOÁN...";
+                    if(activeGame.includes('md5')) startMD5Cracker();
 
                     setTimeout(() => {
-                        el.innerText = data.du_doan; 
-                        tyleEl.innerText = "WIN: " + data.ti_le + "%";
-                        // Màu đỏ cho TÀI và CHẴN, màu trắng cho XỈU và LẺ
-                        el.style.color = (data.du_doan === "TÀI" || data.du_doan === "CHẴN") ? "#ff4d4d" : "#fff";
-                        
-                        // Render số liệu Tài/Xỉu hoặc Chẵn/Lẻ
-                        if(activeGame === "lc79_xd" && data.tong_chan !== undefined) {
-                            document.getElementById('robo-thongke').style.display = 'flex';
-                            document.getElementById('tk-tai').innerText = data.tong_chan; 
-                            document.getElementById('tk-xiu').innerText = data.tong_le;
-                        } else if(data.tong_tai !== undefined && data.tong_xiu !== undefined) {
-                            document.getElementById('robo-thongke').style.display = 'flex';
-                            document.getElementById('tk-tai').innerText = data.tong_tai; 
-                            document.getElementById('tk-xiu').innerText = data.tong_xiu;
+                        stopMD5Cracker();
+                        let result = data.du_doan; document.getElementById('robo-advice').innerText = data.loi_khuyen;
+                        if(result === "CHỜ CẦU") speak("Cầu loạn, tạm nghỉ.");
+                        else {
+                            if(result === "TÀI" || result === "CHẴN") document.getElementById('box-tai').classList.add('active');
+                            else document.getElementById('box-xiu').classList.add('active');
+                            speak("Phang " + result); start15sTimer();
                         }
                         isPredicting = false; 
-                    }, 5000);
+                    }, 3500);
                 }
             } catch (e) {}
         }
 
-        async function loadAdminData() { 
-            document.getElementById('admin-modal').style.display = 'flex'; 
-            let res = await fetch(`/api/admin/list_keys?admin_key=${currentKey}`); 
-            let json = await res.json(); 
-            if(json.status !== "success") return; 
-            
-            let htmlKeys = ""; 
-            json.keys.forEach(k => { 
-                let status = k[2] == 1 ? "<span style='color:red;'>BỊ KHÓA</span>" : "<span style='color:#00ff00;'>HOẠT ĐỘNG</span>";
-                let btn = k[2] == 0 
-                    ? `<button class="btn-sz" style="border-color:red; color:red;" onclick="actionKey('${k[0]}','ban')">KHÓA</button>` 
-                    : `<button class="btn-sz" style="border-color:#00ff00; color:#00ff00;" onclick="actionKey('${k[0]}','unban')">MỞ LẠI</button>`;
-                htmlKeys += `
-                    <div class="list-item" style="flex-direction:column; align-items:flex-start;">
-                        <div style="width:100%; display:flex; justify-content:space-between;">
-                            <b style="color:var(--accent); font-size:16px;">${k[0]}</b>
-                            ${btn}
-                        </div>
-                        <div style="font-size:11px; margin-top:5px; color:#aaa;">HSD: ${k[1]}<br>Tình trạng: ${status}</div>
-                        <button class="btn-sz" style="width:100%; margin-top:8px; margin-left:0; border-color:var(--secondary);" onclick="actionKey('${k[0]}','delete')">XÓA KEY VÀNG</button>
-                    </div>`; 
-            }); 
-            document.getElementById('admin-keys').innerHTML = htmlKeys || "<i style='color:#888;'>Chưa rèn Key nào.</i>"; 
+        async function loadAdminUsers() {
+            let res = await fetch(`/api/admin/users?admin_user=hungadmin1122334455`); let json = await res.json();
+            if(json.status === "success") {
+                let html = "";
+                json.users.forEach(u => {
+                    let st = u[3] == 0 ? '<span style="color:#00ffcc">OK</span>' : '<span style="color:red">BAN</span>';
+                    html += `<div style="display:flex; justify-content:space-between; padding:5px 0; border-bottom:1px solid #333;">
+                        <span style="color:var(--gold); font-weight:bold; width:80px; overflow:hidden;">${u[0]}</span>
+                        <span style="color:var(--cyan);">${u[2].toLocaleString()}đ</span>
+                        <span>${st}</span>
+                        <span style="color:#aaa; cursor:pointer; text-decoration:underline;" onclick="document.getElementById('ad-target-user').value='${u[0]}'">Chọn</span>
+                    </div>`;
+                });
+                document.getElementById('admin-user-list').innerHTML = html;
+            }
         }
 
-        async function adminCreateKey() {
-            let dur = document.getElementById('key-duration').value;
-            let customK = document.getElementById('custom-key-input') ? document.getElementById('custom-key-input').value.trim() : "";
-            let res = await fetch('/api/admin/create_key', { 
-                method: 'POST', headers: {'Content-Type':'application/json'}, 
-                body: JSON.stringify({admin_key: currentKey, duration: dur, custom_key: customK})
-            });
+        async function adminActionUser(action) {
+            let tUser = document.getElementById('ad-target-user').value.trim();
+            if(!tUser) return alert("Chọn User trước!");
+            let val = "";
+            if(action === 'add_money') { val = document.getElementById('ad-money-amt').value; if(!val) return alert("Nhập số tiền!"); }
+            if(action === 'change_pwd') { val = prompt("Nhập mật khẩu mới cho " + tUser + ":"); if(!val) return; }
+            
+            let res = await fetch('/api/admin/action_user', { method: 'POST', headers: {'Content-Type':'application/json'}, body: JSON.stringify({admin_user: 'hungadmin1122334455', target_user: tUser, action: action, value: val}) });
             let json = await res.json();
-            if(json.status === "success") {
-                prompt("Rèn Key thành công! Copy mã này ném cho khách:", json.new_key);
-                if(document.getElementById('custom-key-input')) document.getElementById('custom-key-input').value = ""; 
-                loadAdminData();
-            } else { alert("Lỗi: " + json.msg); }
+            if(json.status === "success") { alert("Thao tác thành công!"); loadAdminUsers(); }
+        }
+
+        async function loadAdminKeys() { 
+            let res = await fetch(`/api/admin/list_keys?admin_user=hungadmin1122334455`); let json = await res.json(); 
+            if(json.status !== "success") return; 
+            let htmlKeys = ""; 
+            json.keys.forEach(k => { 
+                let btn = k[2] == 0 ? `<button class="btn" style="padding:2px; font-size:9px; margin:0; width:40px; border-color:var(--red); color:var(--red); background:none;" onclick="actionKey('${k[0]}','ban')">KHÓA</button>` : `<button class="btn" style="padding:2px; font-size:9px; margin:0; width:40px; border-color:var(--cyan); color:var(--cyan); background:none;" onclick="actionKey('${k[0]}','unban')">MỞ</button>`;
+                htmlKeys += `<div style="border-bottom:1px solid rgba(255,215,0,0.2); padding:5px 0;"><div style="display:flex; justify-content:space-between; align-items:center;"><b style="color:var(--gold); font-size:10px;">${k[0]}</b>${btn}</div><div style="font-size:9px; color:#aaa;">HSD: ${k[1]}</div><button class="btn" style="padding:2px; font-size:9px; margin-top:3px; width:100%; border-color:#555; background:none; color:#fff;" onclick="actionKey('${k[0]}','delete')">XÓA</button></div>`; 
+            }); 
+            document.getElementById('admin-keys').innerHTML = htmlKeys || "<i style='color:#555;'>Trống.</i>"; 
         }
 
         async function actionKey(target, act) { 
-            if(act === 'delete' && !confirm("Chắc chắn muốn HỦY DIỆT vĩnh viễn Key này?")) return;
-            await fetch('/api/admin/action_key', { method: 'POST', headers: {'Content-Type':'application/json'}, body: JSON.stringify({admin_key: currentKey, target_key: target, action: act})}); 
-            loadAdminData(); 
+            if(act === 'delete' && !confirm("Xóa vĩnh viễn?")) return;
+            await fetch('/api/admin/action_key', { method: 'POST', headers: {'Content-Type':'application/json'}, body: JSON.stringify({admin_user: 'hungadmin1122334455', target_key: target, action: act})}); loadAdminKeys(); 
         }
 
         dragElement(document.getElementById("draggable-robot"));
         function dragElement(elmnt) {
-            var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0; var img = elmnt.querySelector('.robo-img');
+            var pos1=0, pos2=0, pos3=0, pos4=0; var img = elmnt.querySelector('.robo-dialog'); 
             img.onmousedown = dragMouseDown; img.ontouchstart = dragTouchStart;
             function dragMouseDown(e) { e = e || window.event; e.preventDefault(); pos3 = e.clientX; pos4 = e.clientY; document.onmouseup = closeDragElement; document.onmousemove = elementDrag; }
             function dragTouchStart(e) { pos3 = e.touches[0].clientX; pos4 = e.touches[0].clientY; document.ontouchend = closeDragElement; document.ontouchmove = elementTouchDrag; }
